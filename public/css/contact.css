@@ -1,0 +1,68 @@
+
+/*contact form start*/
+.contact-page .call-contact .call {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--mainBlack);
+}
+.contact-time {
+    font-size: 16px;
+}
+.mail-contact {
+  margin-top: 20px;
+}
+.call-font-color{
+  color:#44bd32;
+  font-size: 14px;
+  margin-right: 5px;
+}
+.call-number{
+  font-size: 40px;
+}
+.email-link >a {
+  text-decoration: none;
+  font-size: 20px;
+}
+.contact-title{
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.form-check-label{
+  color:var(--mainWhite);
+}
+.form-check-label > a{
+  text-decoration: none;
+}
+.conact-from,.coment-from{
+  padding: 15px;
+}
+.conact-from > input{
+  width: 300px;
+  height: 50px;
+  padding: 10px;
+}
+.coment-from > textarea{
+  width: 632px;
+  height: 120px;
+  padding: 10px;
+}
+.check-form{
+  margin: auto;
+  margin-bottom:15px;
+}
+.contact-submit{
+  text-align: center;
+}
+.contact-submit-button{
+  padding: 8px 40px;
+  background-color: var(--red);
+  color: var(--mainWhite);
+  font-size: 20px;
+  font-weight: 600;
+  transition: all 1s linear;
+}
+.contact-submit-button:hover{
+  background-color:var(--green);
+  color: var(--mainBlack);
+}
+/*contact form end*/

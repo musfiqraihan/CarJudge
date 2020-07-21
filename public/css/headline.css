@@ -1,0 +1,86 @@
+*{
+	padding:0;
+	margin:0;
+	font-family: 'Montserrat', sans-serif;
+}
+
+/*head 2nd part start*/
+
+.navc{
+	width:100%;
+	height:9vh;
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	background-image:linear-gradient(to left,#74b9ff 32%,#fab1a0 68%);
+}
+.logo{
+	width:30%;
+	color:#000;
+	display:flex;
+	float:left;
+	margin-left:100px;
+
+}
+.logoa{
+	text-transform:uppercase;
+	font-size:30px;
+
+}
+.logo a{
+	text-decoration:none;
+	position:absolute;
+	color:#000;
+	top:-10px;
+}
+#co{
+	color:#fff;
+}
+
+.nav{
+	width:70%;
+	justify-content:space-around;
+	display:flex;
+}
+
+.nav a{
+	text-decoration:none;
+	font-size:17px;
+	color:#2d3436;
+	font-family: 'Montserrat', sans-serif;
+	text-transform:uppercase;
+	position:relative;
+}
+.nav a:first-child{
+	color:#4834d4;
+}
+.nav a:first-child:before{
+	content:"";
+	position:absolute;
+	top:100%;
+	left:0;
+	width:0;
+	height:2px;
+	border-bottom:2px solid #575fcf;
+	transition:all 0.4s linear;
+}
+.nav a:before{
+	content:"";
+	position:absolute;
+	top:100%;
+	left:0;
+	width:0;
+	height:2px;
+	border-bottom:2px solid #2c3e50;
+	transition:all 0.4s linear;
+}
+.nav a:hover:before{
+	width:100%;
+}
+.hbotm{
+	color:#000;
+	position:absolute;
+	top:35px;
+	left:135px;
+	cursor:pointer;
+}
