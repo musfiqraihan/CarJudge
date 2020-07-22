@@ -45,7 +45,36 @@ Route::post('/user/registration', 'frontend\UserController@processRegister');
 //login===================
 Route::get('/user/login', 'frontend\UserController@userLogin')->name('userloginpage');
 Route::post('/user/login', 'frontend\UserController@processLogin');
-
-
+//dashboard===========================
+Route::get('/user/profile', 'frontend\UserController@showProfile')->name('profile');
+Route::get('/logout', 'frontend\UserController@logout')->name('logout');
 
 //frontend side end ===============
+
+
+
+
+//backend side start==========================
+
+//admin panel===========
+Route::get('/admin', 'backend\AdminController@login')->name('admin');
+Route::post('/admin', 'backend\AdminController@loginprocess');
+Route::get('/admin/logout', 'backend\AdminController@adminlogout')->name('logout');
+Route::get('/admin/dashboard', 'backend\AdminController@dashboard')->name('dashboard');
+
+
+//admin brands panel=============================
+Route::get('/admin/addbrands', 'backend\BrandController@add')->name('brands.add');
+
+Route::post('/admin/storebrands', 'backend\BrandController@store')->name('brands.store');
+
+Route::get('/admin/brandslist', 'backend\BrandController@show')->name('brands.show');
+
+Route::get('/admin/brandslist/edit/{id}', 'backend\BrandController@edit');
+
+Route::post('/admin/brandslist/update/{id}', 'backend\BrandController@update');
+
+Route::get('/admin/brandslist/{id}', 'backend\BrandController@delete');
+
+Route::get('/admin/brands/user/show', 'backend\BrandController@user')->name('brands.user');
+//backend side end==========================

@@ -32,16 +32,19 @@
   <!---brands---->
   <div class="row">
 
-    
+      @foreach ($brands as $row)
     <!--single brand--->
     <div class="col-sm-4 col-md-3 col-lg-2">
       <div class="brand-list">
         <a href="#">
-          <img src="{{asset('images/brand/toyota.png')}}" class="card-img-top car-img-in" title="variable" alt="japanese">
+          <img data-placement="bottom"
+          data-toggle="tooltip" title="{{ $row->name }}"
+          src="{{ URL::to($row->image) }}" class="card-img-top car-img-in"
+          alt="{{ $row->name }}">
         </a>
       </div>
     </div>
-
+    @endforeach
 
 
 

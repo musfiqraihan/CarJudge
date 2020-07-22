@@ -32,15 +32,11 @@ class UserController extends Controller
 
   try{
      DB::table('users')->insert($data);
-     session()->flash('message', 'User account created.');
-     session()->flash('type', 'success');
-
+     $this->setSuccessMessage('User account created');
      return redirect()->route('userloginpage');
 
   } catch(Exception $e){
-    session()->flash('message', $e->getMessage());
-    session()->flash('type', 'danger');
-
+    $this->setErrorMessage($e->getMessage());
     return redirect()->back();
   }
     //return $request->all();
@@ -50,18 +46,32 @@ class UserController extends Controller
   {
       return view('frontend.users.userlogin');
   }
-  public function processLogin()
+  public function processLogin(Request $request)
   {
     $request->validate([
-     'full_name' => 'required',
-     'email' => 'required|email|unique:users,email',
-     'mobile_number' => 'required|min:6|max:13|unique:users,mobile_number',
-     'password' => 'required|min:8|confirmed'
+     'email' => 'required|email',
+     'password' => 'required|min:8'
   ]);
+    $credentials = $request->except(['_token']);
 
+    if(auth()->attempt($credentials)){
+      $this->setSuccessMessage('Successfully Logged In');
+      return redirect()->route('profile');
+    }else{
+      $this->setErrorMessage('Invalid Credentials.');
+      return redirect()->back();
+    }
+  }
+  public function showProfile()
+  {
+    return view('frontend.users.dashboard');
+  }
 
-
-      return view('frontend.users.dashboard');
+  public function logout()
+  {
+      auth()->logout();
+      $this->setSuccessMessage('Logged out Successfully');
+      return redirect()->route('userloginpage');
   }
 
 }

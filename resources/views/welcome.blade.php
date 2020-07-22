@@ -6,8 +6,8 @@
 <div class="container-fluid coverpage">
   <div class="row height-max align-items-center">
     <div class="col mx-auto text-center text-place">
-      <h2 class="text-capitalize display-3 text-color">Find Your Next Car</h2>
-      <h2 class="text capitalize text-color">Right place to find Cars</h2>
+      <h2 class="text-capitalize display-3">Find Your Next Car</h2>
+      <h2 class="text capitalize">Right place to find Cars</h2>
     </div>
 
   </div>

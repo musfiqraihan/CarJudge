@@ -91,12 +91,17 @@
      data-target="#searchModal" title="search">
        <i class="fas fa-search"></i>
      </a>
+
+
+
+
 <!---user icon--->
+        @guest()
        <a href="{{ route('userloginpage') }}" class="nav-icon"  title="login">
-         <i class="fas fa-user-circle"></i></a>
+         <i class="far fa-user-circle"></i></a>
+         <span class="bar"> | </span>
+       @endguest
 
-
-      <span class="bar"> | </span>
        <a href="http://www.facebook.com" target="_blank" class="nav-icon">
          <i class="fab fa-facebook"></i>
        </a>
@@ -109,9 +114,23 @@
          <i class="fab fa-instagram"></i>
        </a>
 
+
+
+
+
+
    </div>
 
  </div>
+ <!---check user login or not--->
+ @auth()
+ <span class="bar"> | </span>
+
+<p class="mt-4">{{ optional(auth()->user())->full_name }}</p> <a class="btn" href="{{ route('logout') }}">Logout</a>
+
+ @endauth
+
+
 </nav>
 
 <!---Searh --->

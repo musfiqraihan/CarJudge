@@ -30,6 +30,11 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 
 <!-- ./wrapper -->
+
+      
+
+
+
 @yield('content')
 
 <!-- jQuery -->
