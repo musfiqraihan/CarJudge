@@ -62,13 +62,13 @@
     <p>Admin Panel</p>
   </div>
   <!-- User name -->
-  <div class="lockscreen-name">Musfiq Raihan</div>
+  <div class="lockscreen-name">Admin</div>
 
   <!-- START LOCK SCREEN ITEM -->
   <div class="lockscreen-item">
     <!-- lockscreen image -->
     <div class="lockscreen-image">
-      <img src="{{ asset('images/admin1.jpg') }}" alt="User Image">
+      <img src="{{ asset('images/admin.png') }}" alt="User Image">
     </div>
     <!-- /.lockscreen-image -->
 
