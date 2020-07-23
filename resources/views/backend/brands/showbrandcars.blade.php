@@ -8,7 +8,6 @@
     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ml-auto">
       <a href="{{ route('brands.add') }}" class="btn btn-danger btn-sm">ADD Brands</a>
       <a href="{{ route('dashboard') }}" class="btn btn-danger btn-sm">Got To Admin Panel</a>
-      <a href="{{ route('brands.user') }}" class="btn btn-danger btn-sm">Brands User view panel</a>
 
 
       <br><br><br>

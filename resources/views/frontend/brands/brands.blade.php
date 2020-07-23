@@ -19,14 +19,14 @@
       <!---end section title--->
       <div class="row mb-5">
         <div class="col-10 mx-auto col-md-12 d-flex justify-content-end">
-          <button class="btn btn-outline-secondary text-uppercase mx-1" type="button" name="button">all</button>
-          <button class="btn btn-outline-secondary text-uppercase mx-1" type="button" name="button">american</button>
-          <button class="btn btn-outline-secondary text-uppercase mx-1" type="button" name="button">german</button>
-          <button class="btn btn-outline-secondary text-uppercase mx-1" type="button" name="button">japanese</button>
-          <button class="btn btn-outline-secondary text-uppercase mx-1" type="button" name="button">korean</button>
-          <button class="btn btn-outline-secondary text-uppercase mx-1" type="button" name="button">uk</button>
-          <button class="btn btn-outline-secondary text-uppercase mx-1" type="button" name="button">french</button>
-          <button class="btn btn-outline-secondary text-uppercase mx-1" type="button" name="button">indian</button>
+          <button class="btn btn-outline-secondary text-uppercase mx-1 btn-sm active" type="button" name="button">all</button>
+          <button class="btn btn-outline-secondary text-uppercase mx-1 btn-sm" type="button" name="button">american</button>
+          <button class="btn btn-outline-secondary text-uppercase mx-1 btn-sm" type="button" name="button">german</button>
+          <button class="btn btn-outline-secondary text-uppercase mx-1 btn-sm" type="button" name="button">japanese</button>
+          <button class="btn btn-outline-secondary text-uppercase mx-1 btn-sm" type="button" name="button">korean</button>
+          <button class="btn btn-outline-secondary text-uppercase mx-1 btn-sm" type="button" name="button">uk</button>
+          <button class="btn btn-outline-secondary text-uppercase mx-1 btn-sm" type="button" name="button">french</button>
+          <button class="btn btn-outline-secondary text-uppercase mx-1 btn-sm" type="button" name="button">indian</button>
         </div>
       </div>
   <!---brands---->

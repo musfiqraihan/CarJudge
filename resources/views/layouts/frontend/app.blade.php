@@ -13,7 +13,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
    <link rel="shortcut icon" type="image/x-icon"  href="{{ asset('images/favicon.ico') }}"/>
-
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
    <title>Car Judge - Right Place To Find Cars</title>
 
@@ -21,11 +21,68 @@
    <!---font---->
    <script src="{{ asset('js/all.js') }}"></script>
 
+<style media="screen">
+#button {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  margin: 30px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s;
+  z-index: 1000;
+}
+#button:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#button:active {
+  background-color: #555;
+}
+#button::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+</style>
+<script src=”https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js”></script>
+<script type="text/javascript">
+
+jQuery(document).ready(function() {
+
+  var btn = $('#button');
+
+  $(window).scroll(function() {
+    if ($(window).scrollTop() > 300) {
+      btn.addClass('show');
+    } else {
+      btn.removeClass('show');
+    }
+  });
+
+  btn.on('click', function(e) {
+    e.preventDefault();
+    $('html, body').animate({scrollTop:0}, '300');
+  });
+
+});
+</script>
 
 
  </head>
 
  <body>
+
+
+   <a id="button"></a>
 
 
    <!---preloader---->
@@ -56,7 +113,7 @@
       </header>
 
        <!---nav element---->
-       <nav class="navbar sticky-top navbar-expand-md navbar-light shadow-sm" style="background-color: #e3f2fd;">
+       <nav class="navbar navbar-expand-md navbar-light shadow-sm">
          <div class="container">
          <img style="height:40px;weight:40px;" src="{{ URL::to('images/logo.png') }}">
          <a class="navbar-brand ml-2"  href="{{ url('/') }}">CarJudge</a>
@@ -160,6 +217,9 @@
 <!---end search--->
 
 <!--- end nav element---->
+<!---for bottom to top ---->
+
+
 
 
 

@@ -42,11 +42,6 @@ class BrandController extends Controller
          $brands=DB::table('brands')->get();
          return view('backend.brands.showbrandcars',compact('brands'));
        }
-       public function user()
-       {
-         $brands=DB::table('brands')->get();
-         return view('backend.brands.userbrandcars',compact('brands'));
-       }
        public function delete($id)
        {
          $brands=DB::table('brands')->where('id',$id)->first();

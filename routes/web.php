@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //welcome page=====================
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@home');
 
 //frontend side start ===============
 
@@ -63,7 +61,7 @@ Route::get('/admin/logout', 'backend\AdminController@adminlogout')->name('logout
 Route::get('/admin/dashboard', 'backend\AdminController@dashboard')->name('dashboard');
 
 
-//admin brands panel=============================
+//admin brand push panel=============================
 Route::get('/admin/addbrands', 'backend\BrandController@add')->name('brands.add');
 
 Route::post('/admin/storebrands', 'backend\BrandController@store')->name('brands.store');
@@ -76,5 +74,17 @@ Route::post('/admin/brandslist/update/{id}', 'backend\BrandController@update');
 
 Route::get('/admin/brandslist/{id}', 'backend\BrandController@delete');
 
-Route::get('/admin/brands/user/show', 'backend\BrandController@user')->name('brands.user');
+
+//admin brand cars push panel=============================
+Route::get('/admin/brands/overview/addcars', 'backend\CarOverviewBrandController@addcar')->name('addcaroverview');
+
+Route::post('/admin/brands/overview/storecars', 'backend\CarOverviewBrandController@storecar')->name('caroverviewstore');
+
+Route::get('/admin/brands/overview/allcars', 'backend\CarOverviewBrandController@allcar')->name('allcaroverview');
+
+Route::get('/admin/brands/overview/allcars/edit/{id}', 'backend\CarOverviewBrandController@editcar');
+
+Route::post('/admin/brands/overview/allcars/update/{id}', 'backend\CarOverviewBrandController@updatecar');
+
+Route::get('/admin/brands/overview/allcars/delete/{id}', 'backend\CarOverviewBrandController@deletecar');
 //backend side end==========================

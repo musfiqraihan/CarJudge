@@ -63,7 +63,6 @@
 /*navbar*/
 .navbar{
   background: #e3f2fd;
-  opacity: 0.7;
   height: 55px;
   border-bottom: 2px solid #008ed6;
 }
@@ -221,13 +220,10 @@
 
 /*question*/
 .question{
-  background: url('../img/question.jpg')center/cover fixed no-repeat;
+  background: url('../images/question.jpg')center/cover fixed no-repeat;
 }
 .question-grey{
   background: rgba(79,109,122,0.75);
-}
-.question-yellow{
-  background: rgba(227,181,5,0.75);
 }
 .question-icon{
   font-size: 4rem;
@@ -249,7 +245,7 @@
 
 /*feature part*/
 .feature{
-  background: var(--mainGrey);
+  background: #ECF0F1;
 }
 .car-card{
   border-radius: 0!important;
@@ -345,28 +341,20 @@
 
 /*Email subscribe*/
 .email-image{
-  height:40vh;
-  background: url('../img/email.jpg')center/cover fixed no-repeat;
-  text-align: center;
+  height:35vh;
+  background: url('../images/email.jpg')center/cover fixed no-repeat;
 }
-.form-control{
-  font-size: 1.5rem!important;
-  width: 400px;
-}
+
 .form-check{
   color: var(--mainWhite);
-  margin-bottom: 10px;
-}
-.form-text{
-  color:var(--mainGrey)!important;
 }
 .form-check-label{
   font-size: 12px!important;
   cursor: pointer;
 }
 .email-button{
-  padding: 0.375rem 1.75rem!important;
   background:var(--transparentBlue);
+  transition: all 1s linear;
 }
 
 /*end Email subscribe*/

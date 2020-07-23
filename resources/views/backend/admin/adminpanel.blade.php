@@ -23,6 +23,8 @@
        @endif
 
 <a href="{{ route('brands.show') }}" style="text-decoration:none;" class="btn btn-info">Go To Brand Section</a>
+<a href="{{ route('addcaroverview') }}" style="text-decoration:none;" class="btn btn-info">Overview Add Cars Brands</a>
+<a href="{{ route('allcaroverview') }}" style="text-decoration:none;" class="btn btn-info">All cars overviews</a>
 <a href="{{ route('logout') }}" style="text-decoration:none;" class="btn btn-danger">LogOut</a>
 
 
