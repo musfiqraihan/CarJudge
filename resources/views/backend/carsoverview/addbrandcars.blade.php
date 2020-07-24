@@ -33,7 +33,7 @@
 
 
 
-      <form action="{{ route('caroverviewstore') }}" method="post" enctype="multipart/form-data">
+      <form action="{{ route('storesinglecar') }}" method="post" enctype="multipart/form-data">
         @csrf
       <div class="card card-info">
 

@@ -151,15 +151,9 @@
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item">
-      <a href="" class="nav-link">
+      <a href="{{ route('addsinglecar') }}" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
         <p>ADD</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="charts/flot.html" class="nav-link">
-        <i class="far fa-circle nav-icon"></i>
-        <p>EDIT</p>
       </a>
     </li>
     <li class="nav-item">

@@ -61,6 +61,8 @@ Route::get('/admin/logout', 'backend\AdminController@adminlogout')->name('logout
 Route::get('/admin/dashboard', 'backend\AdminController@dashboard')->name('dashboard');
 
 
+
+
 //admin brand push panel=============================
 Route::get('/admin/addbrands', 'backend\BrandController@add')->name('brands.add');
 
@@ -88,3 +90,8 @@ Route::post('/admin/brands/overview/allcars/update/{id}', 'backend\CarOverviewBr
 
 Route::get('/admin/brands/overview/allcars/delete/{id}', 'backend\CarOverviewBrandController@deletecar');
 //backend side end==========================
+
+//single car details=================================================
+Route::get('/admin/brands/singlecar/addcars', 'backend\SingleCarController@addcar')->name('addsinglecar');
+
+Route::post('/admin/brands/singlecar/storecar', 'backend\SingleCarController@storecar')->name('storesinglecar');
