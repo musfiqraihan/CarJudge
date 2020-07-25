@@ -273,4 +273,9 @@ class SingleCarController extends Controller
         }
      }
 
+     public function allcar()
+     {
+       return view('backend.singlecar.showsinglecar');
+     }
+
 }

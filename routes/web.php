@@ -95,3 +95,5 @@ Route::get('/admin/brands/overview/allcars/delete/{id}', 'backend\CarOverviewBra
 Route::get('/admin/brands/singlecar/addcars', 'backend\SingleCarController@addcar')->name('addsinglecar');
 
 Route::post('/admin/brands/singlecar/storecar', 'backend\SingleCarController@storecar')->name('storesinglecar');
+
+Route::get('/admin/brands/singlecar/allcars', 'backend\SingleCarController@allcar')->name('allsinglecar');
