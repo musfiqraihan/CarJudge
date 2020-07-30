@@ -17,7 +17,7 @@
               <li class="breadcrumb-item active">Car Overviews</li>
               <li>
                 <!-- SEARCH FORM -->
-                <form class="form-inline ml-3" action="{{ url('/admin/brands/overview/allcars/search') }}" method="get">
+                <form class="form-inline ml-3" action="{{ url('/admin/brands/singlecar/allcars/search') }}" method="get">
                   <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" name="search" type="search" placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
@@ -42,12 +42,7 @@
 
 
     <div class="float-right">
-      <!-- Success message -->
-           @if(Session::has('success'))
-               <div class="alert alert-success">
-                   {{Session::get('success')}}
-               </div>
-           @endif
+
       <!-- Error message -->
       @if ($errors->any())
       <div class="alert alert-danger">
@@ -73,34 +68,36 @@
             <th>SL</th>
             <th>Car Brand</th>
             <th>Car Model</th>
+            <th>Fuel</th>
+            <th>Engine cc</th>
             <th>Car Price</th>
             <th>Body Type</th>
             <th>Transmission</th>
-            <th>Fuel</th>
+            <th>Max Power</th>
             <th>Year</th>
-            <th>Engine cc</th>
             <th>Seat no</th>
             <th>Car Image</th>
             <th>Action</th>
           </tr>
 
-      @foreach ($boverviews as $row)
+      @foreach ($singlecar as $row)
           <tr>
             <td>{{ $row->id }}</td>
             <td>{{ $row->name }}</td>
             <td>{{ $row->car_model }}</td>
+            <td>{{ $row->fuel_type}}</td>
+            <td>{{ $row->engine }}</td>
             <td>{{ $row->car_price }}</td>
             <td>{{ $row->body_type }}</td>
             <td>{{ $row->transmission }}</td>
-            <td>{{ $row->fuel }}</td>
+            <td>{{ $row->max_power }}</td>
             <td>{{ $row->year }}</td>
-            <td>{{ $row->engine }}</td>
             <td>{{ $row->seat }}</td>
-            <td><img src="{{ URL::to($row->car_image) }}" style="width:70px; height:60px;" alt=""></td>
+            <td><img src="{{ URL::to($row->single_car_image) }}" style="width:70px; height:60px;" alt=""></td>
             <td>
-              <a href="{{ URL::to('/admin/brands/overview/allcars/edit/'.$row->id) }}" class="btn btn-sm btn-info">Edit</a>
-              <a href="" class="btn btn-sm btn-success">View</a>
-              <a href="{{ URL::to('/admin/brands/overview/allcars/delete/'.$row->id) }}" class="btn btn-sm btn-danger">Delete</a>
+              <a href="{{ url('/admin/brands/singlecar/edit/'.$row->id) }}" class="btn btn-sm btn-info">Edit</a>
+              <a href="{{ url('/admin/brands/singlecar/'.$row->id) }}" class="btn btn-sm btn-success">View</a>
+              <a href="{{ url('/admin/brands/singlecar/delete/'.$row->id) }}" class="btn btn-sm btn-danger">Delete</a>
             </td>
           </tr>
 

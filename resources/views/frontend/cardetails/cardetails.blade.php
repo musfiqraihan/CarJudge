@@ -2,26 +2,29 @@
 
 @section('content')
 
+
+
+
+
 <section class="content">
 
     <div class="container">
         <div class="row">
+            <div class="col-12">
 
-            <div class="col-3">
 
-
-                <!---adding image---->
-                <div class="row py-5">
-                    <div class="col-md-6">
-                        <img src="{{ URL::to($singlecar->single_car_image) }}" style="height:300px;width:500px;" alt="">
-                    </div>
-                    <div class="col-md-5">
-                        <h3>{{ $singlecar->car_model }}</h3>
-                        <h4>User rating</h4>
-                        <h2>৳{{ $singlecar->car_price }}</h2>
-                        <button type="button" class="btn btn-success btn-lg" name="button">Post Review</button>
-                    </div>
-                </div>
+<!---adding image---->
+<div class="row py-5">
+  <div class="col-md-6">
+    <img src="{{ URL::to($singlecar->single_car_image) }}" style="height:300px;width:500px;" alt="">
+  </div>
+  <div class="col-md-5">
+          <h3>{{ $singlecar->car_model }}</h3>
+          <h4>User rating</h4>
+          <h2>৳{{ $singlecar->car_price }}</h2>
+          <button type="button" class="btn btn-success btn-lg" name="button">Post Review</button>
+  </div>
+</div>
 
 
 
@@ -101,16 +104,16 @@
 
 
 
-                <div class="card">
+                <div class="card collapsed-card">
                     <div class="card-header">
                         <h3 class="card-title">COMFORT & CONVENIENCE</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                                <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;">
+                    <div class="card-body" style="display: none;">
 
 
                         <div class="card-body">
@@ -230,16 +233,16 @@
 
 
 
-                <div class="card">
+                <div class="card collapsed-card">
                     <div class="card-header">
                         <h3 class="card-title">SAFETY</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                                <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;">
+                    <div class="card-body" style="display: none;">
 
 
                         <div class="card-body">
@@ -339,16 +342,16 @@
 
 
 
-                <div class="card">
+                <div class="card collapsed-card">
                     <div class="card-header">
                         <h3 class="card-title">ENTERTAINMENT & COMMUNICATION</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                                <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;">
+                    <div class="card-body" style="display: none;">
 
 
                         <div class="card-body">
@@ -408,16 +411,16 @@
                 </div>
 
 
-                <div class="card">
+                <div class="card collapsed-card">
                     <div class="card-header">
                         <h3 class="card-title">INTERIOR</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                                <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;">
+                    <div class="card-body" style="display: none;">
 
 
                         <div class="card-body">
@@ -481,16 +484,16 @@
 
 
 
-                <div class="card">
+                <div class="card collapsed-card">
                     <div class="card-header">
                         <h3 class="card-title">FUEL & PERFORMANCE</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                                <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;">
+                    <div class="card-body" style="display: none;">
 
 
                         <div class="card-body">
@@ -531,16 +534,16 @@
 
 
 
-                <div class="card">
+                <div class="card collapsed-card">
                     <div class="card-header">
                         <h3 class="card-title">ENGINE & TRANSMISSION</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                                <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;">
+                    <div class="card-body" style="display: none;">
 
 
                         <div class="card-body">
@@ -613,16 +616,16 @@
 
 
 
-                <div class="card">
+                <div class="card collapsed-card">
                     <div class="card-header">
                         <h3 class="card-title">DIMENTION & CAPACITY</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                                <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;">
+                    <div class="card-body" style="display: none;">
 
 
                         <div class="card-body">
@@ -691,16 +694,16 @@
 
 
 
-                <div class="card">
+                <div class="card collapsed-card">
                     <div class="card-header">
                         <h3 class="card-title">SUSPENSION, STEERING & BRAKES</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                                <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;">
+                    <div class="card-body" style="display: none;">
 
 
                         <div class="card-body">
@@ -763,13 +766,9 @@
 
 
             </div>
-
-
-
         </div>
     </div>
 </section>
-
 
 
 

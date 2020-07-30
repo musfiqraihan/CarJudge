@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 
 class AdminController extends Controller
 {
@@ -22,12 +23,18 @@ class AdminController extends Controller
  $name1 = $request->password;
  $name2 = 'admin';
 if (strcmp($name1, $name2) == 0) {
-  $this->setSuccessMessage('Successfully Logged In');
-  return redirect()->route('dashboard');
+  $notification=array(
+    'message'=>'Successfully Logged In',
+    'alert-type'=>'success'
+  );
+  return redirect()->route('dashboard')->with($notification);
    }
    else{
-     $this->setErrorMessage('Invalid Credentials.');
-     return redirect()->back();
+     $notification=array(
+       'message'=>'Invalid Credentials!',
+       'alert-type'=>'error'
+     );
+     return redirect()->back()->with($notification);
    }
 
   }
@@ -41,7 +48,14 @@ if (strcmp($name1, $name2) == 0) {
 
   public function dashboard()
   {
-    return view('backend.admin.adminpanel');
+    $subscribe=DB::table('subscribe')->get();
+    return view('backend.admin.adminpanel',compact('subscribe'));
+  }
+  public function search(Request $request)
+  {
+    $search= $request->get('search');
+    $subscribe=DB::table('subscribe')->where('name','like','%'.$search.'%')->paginate(10);
+    return view('backend.admin.adminpanel',compact('subscribe'));
   }
 
 }

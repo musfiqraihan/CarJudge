@@ -36,26 +36,6 @@
 
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
-  <!-- Error message -->
-  @if ($errors->any())
-  <div class="alert alert-danger">
-  <ul>
-  @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
-  @endforeach
-  </ul>
-  </div>
-  @endif
-
-
-
-
-  <!--  message -->
-       @if(session()->has('message'))
-           <div class="alert alert-{{ session('type') }}">
-               {{ session('message') }}
-           </div>
-       @endif
 
   <div class="lockscreen-logo">
       <a href="{{ URL::to('/') }}" class="display-3"><b>Car</b>Judge</a>

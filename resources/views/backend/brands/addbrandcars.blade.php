@@ -8,6 +8,16 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <!-- Error message -->
+    @if ($errors->any())
+    <div class="alert alert-danger">
+    <ul>
+    @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+    @endforeach
+    </ul>
+    </div>
+    @endif
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -41,22 +51,6 @@
               <div class="row">
                 <!-- left column -->
                 <div class="col-md-6 mx-auto py-5">
-                  <!-- Success message -->
-                       @if(Session::has('success'))
-                           <div class="alert alert-success">
-                               {{Session::get('success')}}
-                           </div>
-                       @endif
-                  <!-- Error message -->
-                  @if ($errors->any())
-                  <div class="alert alert-danger">
-                  <ul>
-                  @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                  @endforeach
-                  </ul>
-                  </div>
-                  @endif
                   <!-- general form elements -->
                   <div class="card card-primary">
                     <div class="card-header">

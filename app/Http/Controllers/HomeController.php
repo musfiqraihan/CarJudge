@@ -9,9 +9,13 @@ class HomeController extends Controller
 {
   public function home(Request $request)
   {
-    $boverviews=DB::table('boverviews')->join('brands','boverviews.brands_id','brands.id')
-              ->select('boverviews.*','brands.name')
-              ->get();
-          return view('welcome',compact('boverviews'));
+    $brands = DB::table('brands')->get();
+    $singlecar = DB::table('singlecar')
+    ->join('brands','singlecar.brands_id','brands.id')
+    ->join('boverviews','singlecar.car_model_id','boverviews.id')
+    ->select('singlecar.*','brands.name','boverviews.car_model')
+    ->get();
+    return view('welcome',compact('brands','singlecar'));
+
   }
 }

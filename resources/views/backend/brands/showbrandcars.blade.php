@@ -17,6 +17,19 @@
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active">Brands</li>
+                <li>
+                  <!-- SEARCH FORM -->
+                  <form class="form-inline ml-3" action="{{ url('/admin/brandslist/search') }}" method="get">
+                    <div class="input-group input-group-sm">
+                      <input class="form-control form-control-navbar" name="search" type="search" placeholder="Search" aria-label="Search">
+                      <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </li>
               </ol>
             </div>
           </div>
@@ -31,24 +44,6 @@
 
 
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ml-auto">
-
-          <!-- Success message -->
-               @if(Session::has('success'))
-                   <div class="alert alert-success">
-                       {{Session::get('success')}}
-                   </div>
-               @endif
-          <!-- Error message -->
-          @if ($errors->any())
-          <div class="alert alert-danger">
-          <ul>
-          @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-          @endforeach
-          </ul>
-          </div>
-          @endif
-
 
               <table class="table table-responsive">
                 <tr>

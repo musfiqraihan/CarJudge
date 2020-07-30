@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 //welcome page=====================
 Route::get('/','HomeController@home');
+Route::get('/brands/cardetails/{id}', 'CarDetailsController@details');
+Route::get('/car/search', 'frontend\CarSearchController@search');
+Route::post('/home/subscribe', 'SubscribeController@subscribe');
+
 
 //frontend side start ===============
 
@@ -45,7 +50,7 @@ Route::get('/user/login', 'frontend\UserController@userLogin')->name('userloginp
 Route::post('/user/login', 'frontend\UserController@processLogin');
 //dashboard===========================
 Route::get('/user/profile', 'frontend\UserController@showProfile')->name('profile');
-Route::get('/logout', 'frontend\UserController@logout')->name('logout');
+Route::get('/logout', 'frontend\UserController@logout');
 
 //frontend side end ===============
 
@@ -59,6 +64,7 @@ Route::get('/admin', 'backend\AdminController@login')->name('admin');
 Route::post('/admin', 'backend\AdminController@loginprocess');
 Route::get('/admin/logout', 'backend\AdminController@adminlogout')->name('logout');
 Route::get('/admin/dashboard', 'backend\AdminController@dashboard')->name('dashboard');
+Route::get('/admin/dashboard/search', 'backend\AdminController@search');
 
 
 
@@ -69,6 +75,8 @@ Route::get('/admin/addbrands', 'backend\BrandController@add')->name('brands.add'
 Route::post('/admin/storebrands', 'backend\BrandController@store')->name('brands.store');
 
 Route::get('/admin/brandslist', 'backend\BrandController@show')->name('brands.show');
+
+Route::get('/admin/brandslist/search', 'backend\BrandController@search');
 
 Route::get('/admin/brandslist/edit/{id}', 'backend\BrandController@edit');
 
@@ -84,6 +92,8 @@ Route::post('/admin/brands/overview/storecars', 'backend\CarOverviewBrandControl
 
 Route::get('/admin/brands/overview/allcars', 'backend\CarOverviewBrandController@allcar')->name('allcaroverview');
 
+Route::get('/admin/brands/overview/allcars/search', 'backend\CarOverviewBrandController@search');
+
 Route::get('/admin/brands/overview/allcars/edit/{id}', 'backend\CarOverviewBrandController@editcar');
 
 Route::post('/admin/brands/overview/allcars/update/{id}', 'backend\CarOverviewBrandController@updatecar');
@@ -97,3 +107,13 @@ Route::get('/admin/brands/singlecar/addcars', 'backend\SingleCarController@addca
 Route::post('/admin/brands/singlecar/storecar', 'backend\SingleCarController@storecar')->name('storesinglecar');
 
 Route::get('/admin/brands/singlecar/allcars', 'backend\SingleCarController@allcar')->name('allsinglecar');
+
+Route::get('/admin/brands/singlecar/{id}', 'backend\SingleCarController@showcar');
+
+Route::get('/admin/brands/singlecar/delete/{id}', 'backend\SingleCarController@deletecar');
+
+Route::get('/admin/brands/singlecar/edit/{id}', 'backend\SingleCarController@editcar');
+
+Route::get('/admin/brands/singlecar/update', 'backend\SingleCarController@updatecar');
+
+Route::get('/admin/brands/singlecar/allcars/search', 'backend\SingleCarController@searchcar');

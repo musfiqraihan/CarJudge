@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="{{asset('backend')}}/plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -53,17 +54,7 @@
 
     </ul>
 
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+
 
   </nav>
   <!-- /.navbar -->
@@ -193,25 +184,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @yield('content')
+
+
+
 
 <!-- jQuery -->
 <script src="{{asset('backend')}}/plugins/jquery/jquery.min.js"></script>
@@ -247,5 +223,25 @@
 <script src="{{asset('backend')}}/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('backend')}}/dist/js/demo.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <script>
+    @if(Session::has('message'))
+        var type="{{Session::get('alert-type','info')}}"
+        switch(type) {
+          case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+          case 'success':
+               toastr.success("{{ Session::get('message') }}");
+               break;
+          case 'warning':
+               toastr.warning("{{ Session::get('message') }}");
+               break;
+          case 'error':
+              toastr.error("{{ Session::get('message') }}");
+               break;
+        }
+        @endif
+  </script>
 </body>
 </html>

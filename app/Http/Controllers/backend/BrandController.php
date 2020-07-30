@@ -30,11 +30,19 @@ class BrandController extends Controller
         $success=$image->move($upload_path,$image_full_name);
         $data['image']=$image_url;
         DB::table('brands')->insert($data);
-        $this->setSuccessMessage('Successfully inserted data');
-        return redirect()->route('brands.show');
-      }else{
-        $this->setSuccessMessage('Successfully inserted data');
-        return redirect()->route('brands.show');
+        $notification=array(
+            'message'=>'Successfully inserted data',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('brands.show')->with($notification);
+
+      }
+      else{
+        $notification=array(
+          'message'=>'Successfully inserted data',
+          'alert-type'=>'success'
+        );
+        return redirect()->route('brands.show')->with($notification);
       }
  }
        public function show()
@@ -50,9 +58,17 @@ class BrandController extends Controller
          $delete=DB::table('brands')->where('id',$id)->delete();
          if ($delete) {
            unlink($image);
-           return back()->with('success', 'Deleted Successfully ^_^');
+           $notification=array(
+             'message'=>'Successfully Deleted!',
+             'alert-type'=>'success'
+           );
+           return redirect()->back()->with($notification);
          }else{
-           return back()->with('error', 'Something wrong -_-');
+           $notification=array(
+             'message'=>'Something wrong!',
+             'alert-type'=>'error'
+           );
+           return redirect()->back()->with($notification);
          }
        }
        public function edit($id)
@@ -63,7 +79,7 @@ class BrandController extends Controller
        public function update(Request $request,$id)
        {
          $validatedData = $request->validate([
-           'name'=>'required|unique:brands|max:15',
+           'name'=>'max:15',
            'image'=>'mimes:png,PNG|max:1000'
          ]);
          $data=array();
@@ -79,13 +95,26 @@ class BrandController extends Controller
              $data['image']=$image_url;
              unlink($request->old_photo);
              DB::table('brands')->where('id',$id)->update($data);
-             $this->setSuccessMessage('Successfully edited data');
-             return redirect()->route('brands.show');
+             $notification=array(
+               'message'=>'Successfully edited data!',
+               'alert-type'=>'success'
+             );
+             return redirect()->route('brands.show')->with($notification);
        }else{
              $data['image']=$request->old_photo;
              DB::table('brands')->where('id',$id)->update($data);
-             $this->setSuccessMessage('Successfully edited data');
-             return redirect()->route('brands.show');
+             $notification=array(
+               'message'=>'Successfully edited data!',
+               'alert-type'=>'success'
+             );
+             return redirect()->route('brands.show')->with($notification);
            }
+       }
+
+       public function search(Request $request)
+       {
+         $search= $request->get('search');
+         $brands=DB::table('brands')->where('name','like','%'.$search.'%')->paginate(5);
+         return view('backend.brands.showbrandcars',compact('brands'));
        }
 }

@@ -34,22 +34,17 @@
 
         <div class="float-right">
 
-        <!-- Success message -->
-             @if(Session::has('success'))
-                 <div class="alert alert-success">
-                     {{Session::get('success')}}
-                 </div>
-             @endif
-        <!-- Error message -->
-        @if ($errors->any())
-        <div class="alert alert-danger">
-        <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-        </ul>
-        </div>
-        @endif
+          <!-- Error message -->
+          @if ($errors->any())
+          <div class="alert alert-danger">
+          <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+          </ul>
+          </div>
+          @endif
+
 
       </div>
 

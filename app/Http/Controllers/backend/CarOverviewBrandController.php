@@ -47,15 +47,19 @@ class CarOverviewBrandController extends Controller
         $success=$image->move($upload_path,$image_full_name);
         $data['car_image']=$image_url;
         DB::table('boverviews')->insert($data);
-        session()->flash('message', 'Data inserted Successfully.');
-        session()->flash('type', 'success');
-        return redirect()->route('dashboard');
+        $notification=array(
+            'message'=>'Successfully inserted data',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('dashboard')->with($notification);
       }
       else{
         DB::table('boverviews')->insert($data);
-        session()->flash('message', 'Data inserted Successfully.');
-        session()->flash('type', 'success');
-        return redirect()->route('dashboard');
+        $notification=array(
+            'message'=>'Successfully inserted data',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('dashboard')->with($notification);
       }
 
   }
@@ -77,9 +81,12 @@ class CarOverviewBrandController extends Controller
          $delete=DB::table('boverviews')->where('id',$id)->delete();
          if ($delete) {
            unlink($image);
-           session()->flash('message', 'Deleted Successfully.');
-           session()->flash('type', 'success');
-           return redirect()->back();
+           $notification=array(
+               'message'=>'Deleted Successfully',
+               'alert-type'=>'success'
+           );
+           return redirect()->back()->with($notification);
+
          }else{
            return back()->with('error', 'Something wrong -_-');
          }
@@ -127,18 +134,31 @@ class CarOverviewBrandController extends Controller
         $data['car_image']=$image_url;
         unlink($request->old_photo);
         DB::table('boverviews')->where('id',$id)->update($data);
-        session()->flash('message', 'Data updated Successfully.');
-        session()->flash('type', 'success');
-        return redirect()->route('allcaroverview');
+        $notification=array(
+            'message'=>'Data updated Successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('allcaroverview')->with($notification);
       }
       else{
         $data['car_image']=$request->old_photo;
-            DB::table('boverviews')->where('id',$id)->update($data);
-        session()->flash('message', 'Data inserted Successfully.');
-        session()->flash('type', 'success');
-        return redirect()->route('allcaroverview');
+       DB::table('boverviews')->where('id',$id)->update($data);
+       $notification=array(
+           'message'=>'Data updated Successfully',
+           'alert-type'=>'success'
+       );
+       return redirect()->route('allcaroverview')->with($notification);
       }
 
+  }
+
+  public function search(Request $request)
+  {
+          $search = $request->get('search');
+          $boverviews=DB::table('boverviews')
+          ->join('brands','boverviews.brands_id','brands.id')
+          ->where('car_model','like','%'.$search.'%')->paginate(5);
+          return view('backend.carsoverview.allcarsoverviews',compact('boverviews'));
   }
 
 }

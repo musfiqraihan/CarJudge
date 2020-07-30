@@ -4,7 +4,7 @@
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+  <link rel="stylesheet" href="{{asset('backend')}}/dist/css/adminlte.min.css">
    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" media="all" />
    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" media="all" />
   <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}" media="all" />
@@ -13,7 +13,14 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
    <link rel="shortcut icon" type="image/x-icon"  href="{{ asset('images/favicon.ico') }}"/>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="{{ asset('css/select2.min.css') }}" media="all" />
+
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"  media="screen">
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 
    <title>Car Judge - Right Place To Find Cars</title>
 
@@ -22,6 +29,11 @@
    <script src="{{ asset('js/all.js') }}"></script>
 
 <style media="screen">
+
+
+
+
+
 #button {
   display: inline-block;
   background-color: #FF9800;
@@ -143,11 +155,7 @@ jQuery(document).ready(function() {
 
        <!--social icons-->
 <div class="nav-icons d-none d-lg-block">
- <!---search icon--->
-     <a href="#" class="nav-icon" data-toggle="modal"
-     data-target="#searchModal" title="search">
-       <i class="fas fa-search"></i>
-     </a>
+
 
 
 
@@ -157,19 +165,38 @@ jQuery(document).ready(function() {
        <a href="{{ route('userloginpage') }}" class="nav-icon"  title="login">
          <i class="far fa-user-circle"></i></a>
          <span class="bar"> | </span>
+         <a href="http://www.facebook.com" target="_blank" class="nav-icon">
+           <i class="fab fa-facebook"></i>
+         </a>
+
+         <a href="http://www.twitter.com"  target="_blank" class="nav-icon">
+           <i class="fab fa-twitter"></i>
+         </a>
+
+         <a href="http://www.instagram.com" target="_blank" class="nav-icon">
+           <i class="fab fa-instagram"></i>
+         </a>
+
        @endguest
+       @auth()
+         <a href="" class="nav-icon">
+          <i class="fas fa-user-circle"></i></a>
+          <a href="http://www.facebook.com" target="_blank" class="nav-icon">
+            <i class="fab fa-facebook"></i>
+          </a>
 
-       <a href="http://www.facebook.com" target="_blank" class="nav-icon">
-         <i class="fab fa-facebook"></i>
-       </a>
+          <a href="http://www.twitter.com"  target="_blank" class="nav-icon">
+            <i class="fab fa-twitter"></i>
+          </a>
 
-       <a href="http://www.twitter.com"  target="_blank" class="nav-icon">
-         <i class="fab fa-twitter"></i>
-       </a>
+          <a href="http://www.instagram.com" target="_blank" class="nav-icon">
+            <i class="fab fa-instagram"></i>
+          </a>
+         <span class="bar"> | </span>
+      <a class="btn btn-sm btn-danger" href="{{ url('/logout') }}">Logout</a>
 
-       <a href="http://www.instagram.com" target="_blank" class="nav-icon">
-         <i class="fab fa-instagram"></i>
-       </a>
+       @endauth
+
 
 
 
@@ -180,41 +207,10 @@ jQuery(document).ready(function() {
 
  </div>
  <!---check user login or not--->
- @auth()
- <span class="bar"> | </span>
 
-<p class="mt-4">{{ optional(auth()->user())->full_name }}</p> <a class="btn" href="{{ route('logout') }}">Logout</a>
-
- @endauth
 
 
 </nav>
-
-<!---Searh --->
-<div class="modal" id="searchModal">
- <div class="container">
-   <div class="modal-dialog modal-lg">
-         <div class="modal-content bg-dark">
-           <div class="modal-header">
-             <h5 class="modal-title text-light">Finds Cars</h5>
-           </div>
-           <div class="modal-body">
-             <form action="" method="post">
-               <div class="input-group">
-                 <input class="form-control" type="text" name="" placeholder="Type to select car name, e.g. Toyota Corolla Axio">
-                 <div class="input-group-append">
-                   <span class="btn btn-primary input-group-text">Search</span>
-                 </div>
-               </div>
-               <samll class="text-light">e.g. Toyota Corolla Axio</small>
-                 <span class="adv-search"><a href="#">Advance Search?</a></span>
-             </form>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
-<!---end search--->
 
 <!--- end nav element---->
 <!---for bottom to top ---->
@@ -334,16 +330,39 @@ jQuery(document).ready(function() {
 
       <!---jquery---->
       <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+      <script src="{{asset('backend')}}/dist/js/adminlte.js"></script>
       <!----script js---->
       <script src="{{ asset('js/script.js') }}"></script>
+
 
       <script src="{{ asset('js/navbar-fixed.js') }}"></script>
       <!----bootstrap js---->
       <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
+      <script src="{{ asset('js/select2.full.min') }}"></script>
+
+
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-
+<script>
+  @if(Session::has('message'))
+      var type="{{Session::get('alert-type','info')}}"
+      switch(type) {
+        case 'info':
+              toastr.info("{{ Session::get('message') }}");
+              break;
+        case 'success':
+             toastr.success("{{ Session::get('message') }}");
+             break;
+        case 'warning':
+             toastr.warning("{{ Session::get('message') }}");
+             break;
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+             break;
+      }
+      @endif
+</script>
 
 
 
