@@ -12,184 +12,229 @@
                 <div class="modal-content bg-light">
 
                     <div class="modal-body">
-                          <form action="{{ url('/car/search') }}" method="get">
+                        <form action="{{ url('/car/search') }}" method="get" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
 
-                             <div class="row">
-
-                                        <div class="col-md-4">
-                                            <div class="floating-label-form-group">
-                                                <label>Choose Brand</label>
-                                                <br>
-                                                <select class="form-control text-size" name="brands_id">
-                                                    <option valuedisabled="disabled">Select</option>
-                                                    @foreach ($brands as $row)
-                                                    <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="floating-label-form-group">
-                                                <label>Choose Car Model</label>
-                                                <br>
-                                                <select class="form-control text-size" name="carsearch">
-                                                    <option valuedisabled="disabled">Select</option>
-                                                    @foreach ($singlecar as $row)
-                                                    <option value="{{ $row->id }}">{{ $row->car_model }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="floating-label-form-group">
-                                                <label>Choose Year</label>
-                                                <br>
-                                                <select class="form-control text-size" name="carsearch">
-                                                    <option valuedisabled="disabled">Select</option>
-                                                    @foreach ($singlecar as $row)
-                                                    <option>{{ $row->year }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-
-                             </div>
-
-
-
-
-
-
-
-                     <br>
-                        <div class="row">
-                            <div class="col-md-7">
-
-                                <label>Price</label>
-                                <div class="d-flex justify-content-left">
-                                  <p class="font-weight-bold text-black mr-2">50000</p>
-                                    <div class="w-75">
-                                        <input type="range" class="custom-range" id="customRange11" min="50000" max="30000000">
+                                <div class="col-md-4">
+                                    <div class="floating-label-form-group">
+                                        <label>Choose Brand</label>
+                                        <br>
+                                        <select class="form-control text-size" id="brands_id" name="brands_id">
+                                            <option selected="" disabled="">Select</option>
+                                            @foreach ($brands as $row)
+                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <p class="font-weight-bold text-black ml-2 valueSpan2"></p>
                                 </div>
-                                <script type="text/javascript">
-                                    $(document).ready(function() {
+                                <div class="col-md-4">
+                                    <div class="floating-label-form-group">
+                                        <label>Choose Car Model</label>
+                                        <br>
+                                        <select class="form-control text-size dynamic" id="car_model_id" name="car_model_id">
+                                            <option selected="" disabled="">Select</option>
 
-                                        const $valueSpan = $('.valueSpan2');
-                                        const $value = $('#customRange11');
-                                        $valueSpan.html($value.val());
-                                        $value.on('input change', () => {
+                                            <option value=""></option>
 
-                                            $valueSpan.html($value.val());
-                                        });
-                                    });
-                                </script>
+                                        </select>
+                                    </div>
+                                </div>
 
+                                <div class="col-md-4">
+                                    <div class="floating-label-form-group">
+                                        <label>Choose Year</label>
+                                        <br>
+                                        <select class="form-control text-size dynamic" id="year" name="year">
+                                            <option selected="" disabled="">Select</option>
+
+                                            <option value=""></option>
+
+                                        </select>
+                                    </div>
+                                </div>
 
 
                             </div>
-                            <div class="col-md-2 justify-content-left" style="margin-top:15px;">
-                                <button type="submit" class="btn btn-success" style="padding:8px 30px;font-size:20px;">Search</button>
+
+
+
+                            <div class="row">
+
+                                <div class="col-md-9" style="margin-top:15px;">
+                                    <button type="submit" name="carsearch" class="btn btn-success btn-block" style="font-size:16px;">Search</button>
+                                </div>
+                                <div class="col-md-3" style="margin-top:10px;">
+
+                                    <small>Not found yet then go for</small>
+                                    <span class="adv-search"><a href="#">Advance Search?</a></span>
+
+                                </div>
+
                             </div>
-
-                            <div class="col-md-3" style="margin-top:10px;">
-
-                              <small>Not found yet then go for</small>
-                              <span class="adv-search"><a href="#">Advance Search?</a></span>
-
-                        </div>
-
-
-
 
                         </form>
+
                     </div>
                 </div>
-            </div>
-            <!---end search-->
+                <!---end search-->
 
-            <h2 class="text-capitalize text-center display-3">Find Your Next Car</h2>
-            <h2 class="text capitalize text-center">Right place to find Cars</h2>
+                <h2 class="text-capitalize text-center display-3">Find Your Next Car</h2>
+                <h2 class="text capitalize text-center">Right place to find Cars</h2>
 
-        </div>
-
-
-
-    </div>
-</div>
-
-
-
-
-<!---skills sction--->
-<section class="skills py-5 text-center" id=skills>
-    <div class="container">
-        <!---section title--->
-        <div class="row mb-5">
-            <div class="col d-flex flex-wrap justify-content-center">
-                <h1 class="font-weight-bold text-capitalize align-self-center mx-1">why choose</h1>
-                <h1 class="section-title-special mx-1">CarJudge</h1>
-            </div>
-        </div>
-        <!---end section title--->
-
-
-
-
-        <!---skill boxes--->
-        <div class="row justify-content-center">
-
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="card text-white bg-info mb-3">
-                    <div class="card-body">
-                        <h5 class=" text-capitalize">all brands</h5>
-
-                        <p class="card-text">Most of the brands that appear in this country are here. We will ensure that you can get your ideal car here.</p>
-                    </div>
-                </div>
             </div>
 
-
-
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="text-info text-capitalize">compare cars</h5>
-                        <p class="card-text">You can easily compare cars between different cars which car is affordable or proper for you.</p>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="card text-white bg-info mb-3">
-                    <div class="card-body">
-                        <h5 class="text-capitalize">review</h5>
-
-                        <p class="card-text">Examine the reviews and choose a rated car. Company owner, car expert and also users can post a review.</p>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="text-info text-capitalize">user friendly</h5>
-
-                        <p class="card-text">Our site is much user friendly, answer some questions you will get your prefered car in a moment.</p>
-                    </div>
-                </div>
-            </div>
 
 
         </div>
     </div>
-</section>
+
+
+
+
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+
+            jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
+            jQuery('select[name="year"]').attr('disabled', 'disabled');
+
+            jQuery('select[name="brands_id"]').on('change', function() {
+                var brandID = jQuery(this).val();
+                if (brandID) {
+                    jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
+                    jQuery('select[name="year"]').attr('disabled', 'disabled');
+
+                    jQuery.ajax({
+                        url: '/getmodels/' + brandID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            jQuery('select[name="car_model_id"]').empty();
+                            jQuery('select[name="year"]').empty();
+                            $('select[name="car_model_id"]').append('<option selected="" disabled="">Select</option>');
+                            $('select[name="year"]').append('<option selected="" disabled="">Select</option>');
+                            jQuery.each(data, function(key, value) {
+                                $('select[name="car_model_id"]').append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            jQuery('select[name="car_model_id"]').removeAttr('disabled');
+                        }
+                    });
+
+                } else {
+                    $('select[name="car_model_id"]').empty();
+                    $('select[name="year"]').empty();
+                }
+            });
+
+
+        });
+
+        jQuery(document).ready(function() {
+
+
+            jQuery('select[name="car_model_id"]').on('change', function() {
+                var modelID = jQuery(this).val();
+                if (modelID) {
+                    jQuery('select[name="year"]').attr('disabled', 'disabled');
+
+                    jQuery.ajax({
+                        url: '/getyears/' + modelID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            jQuery('select[name="year"]').empty();
+                            $('select[name="year"]').append('<option selected="" disabled="">Select</option>');
+                            jQuery.each(data, function(key, value) {
+                                $('select[name="year"]').append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            jQuery('select[name="year"]').removeAttr('disabled');
+                        }
+                    });
+
+                } else {
+                    $('select[name="car_model_id"]').empty();
+                    $('select[name="year"]').empty();
+                }
+            });
+
+
+
+        });
+    </script>
+
+
+
+
+
+
+
+    <!---skills sction--->
+    <section class="skills py-5 text-center" style="background:#ECF0F1;">
+        <div class="container">
+            <!---section title--->
+            <div class="row mb-5">
+                <div class="col d-flex flex-wrap justify-content-center">
+                    <h1 class="font-weight-bold text-capitalize align-self-center mx-1" style="color:black;">why choose</h1>
+                    <h1 class="section-title-special mx-1">CarJudge</h1>
+                </div>
+            </div>
+            <!---end section title--->
+
+
+
+
+            <!---skill boxes--->
+            <div class="row justify-content-center">
+
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="card text-white bg-info mb-3">
+                        <div class="card-body">
+                            <h5 class=" text-capitalize">all brands</h5>
+
+                            <p class="card-text">Most of the brands that appear in this country are here. We will ensure that you can get your ideal car here.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="text-info text-capitalize">compare cars</h5>
+                            <p class="card-text" style="color:#17A2B8;">You can easily compare cars between different cars which car is affordable or proper for you.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="card text-white bg-info mb-3">
+                        <div class="card-body">
+                            <h5 class="text-capitalize">review</h5>
+
+                            <p class="card-text">Examine the reviews and choose a rated car. Company owner, car expert and also users can post a review.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="text-info text-capitalize">user friendly</h5>
+
+                            <p class="card-text" style="color:#17A2B8;">Our site is much user friendly, answer some questions you will get your prefered car in a moment.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
 
 
 
@@ -264,7 +309,7 @@
             <!--single car--->
             <div class="col-10 mx-auto my-3 col-md-6 col-lg-4">
                 <div class="card car-card">
-                    <img src="{{ URL::to($row->single_car_image) }}" style="height:200px;" class="card-img-top car-img" alt="">
+                    <img src="{{ URL::to($row->car_image) }}" style="height:200px;" class="card-img-top car-img" alt="">
                     <!--card body-->
                     <div class="card-body">
                         <div class="car-info d-flex justify-content-between">
@@ -321,7 +366,7 @@
     <div class="container ">
 
         <form action="{{ url('/home/subscribe') }}" method="post">
-          @csrf
+            @csrf
             <div class="form-row align-items-center">
                 <!--single question first--->
                 <div class="col-sm-3 my-5 mr-4 ml-4">

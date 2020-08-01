@@ -17,52 +17,22 @@ class CarOverviewBrandController extends Controller
   public function storecar(Request $request)
   {
     $validatedData = $request->validate([
-      'car_model'=>'required|max:100|unique:boverviews,car_model',
-      'car_price'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6|max:8',
-      'body_type'=>'required|max:50',
-      'transmission'=>'required|max:50',
-      'fuel'=>'required|max:50',
-      'year'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:4|max:4',
-      'engine'=>'required|max:50',
-      'seat'=>'regex:/^([2-8\s\-\+\(\)]*)$/',
-      'car_image'=>'required | mimes:png,PNG,jpg,JPG,jpeg,JPEG|max:1000'
+      'car_model'=>'required|unique:boverviews,car_model|max:100',
+      'launched'=>'required | max:100'
     ]);
     $data=array();
     $data['brands_id']=$request->brands_id;
     $data['car_model']=$request->car_model;
-    $data['car_price']=$request->car_price;
-    $data['body_type']=$request->body_type;
-    $data['transmission']=$request->transmission;
-    $data['fuel']=$request->fuel;
-    $data['year']=$request->year;
-    $data['engine']=$request->engine;
-    $data['seat']=$request->seat;
-    $image = $request->file('car_image');
-      if ($image) {
-        $image_name=hexdec(uniqid());
-        $ext=strtolower($image->getClientOriginalExtension());
-        $image_full_name=$image_name.'.'.$ext;
-        $upload_path='images/cars/';
-        $image_url=$upload_path.$image_full_name;
-        $success=$image->move($upload_path,$image_full_name);
-        $data['car_image']=$image_url;
-        DB::table('boverviews')->insert($data);
-        $notification=array(
-            'message'=>'Successfully inserted data',
-            'alert-type'=>'success'
-        );
-        return redirect()->route('dashboard')->with($notification);
-      }
-      else{
-        DB::table('boverviews')->insert($data);
-        $notification=array(
-            'message'=>'Successfully inserted data',
-            'alert-type'=>'success'
-        );
-        return redirect()->route('dashboard')->with($notification);
-      }
+    $data['launched']=$request->launched;
 
-  }
+        DB::table('boverviews')->insert($data);
+        $notification=array(
+            'message'=>'Successfully inserted data',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('allcaroverview')->with($notification);
+   }
+
 
   public function allcar()
   {
@@ -76,11 +46,8 @@ class CarOverviewBrandController extends Controller
        {
          $boverviews=DB::table('boverviews')->where('id',$id)->first();
 
-         $image = $boverviews->car_image;
-
          $delete=DB::table('boverviews')->where('id',$id)->delete();
          if ($delete) {
-           unlink($image);
            $notification=array(
                'message'=>'Deleted Successfully',
                'alert-type'=>'success'
@@ -102,54 +69,20 @@ class CarOverviewBrandController extends Controller
 
   public function updatecar(Request $request,$id){
     $validatedData = $request->validate([
-      'car_model'=>'max:100',
-      'car_price'=>'regex:/^([0-9\s\-\+\(\)]*)$/|min:6|max:8',
-      'body_type'=>'max:50',
-      'transmission'=>'max:50',
-      'fuel'=>'max:50',
-      'year'=>'regex:/^([0-9\s\-\+\(\)]*)$/|min:4|max:4',
-      'engine'=>'max:50',
-      'seat'=>'regex:/^([2-8\s\-\+\(\)]*)$/',
-      'car_image'=>'mimes:png,PNG,jpg,JPG,jpeg,JPEG|max:1000'
+      'car_model'=>'unique:boverviews,car_model|max:100',
+      'launched'=>'max:100'
     ]);
 
     $data=array();
     $data['brands_id']=$request->brands_id;
     $data['car_model']=$request->car_model;
-    $data['car_price']=$request->car_price;
-    $data['body_type']=$request->body_type;
-    $data['transmission']=$request->transmission;
-    $data['fuel']=$request->fuel;
-    $data['year']=$request->year;
-    $data['engine']=$request->engine;
-    $data['seat']=$request->seat;
-    $image = $request->file('car_image');
-      if ($image) {
-        $image_name=hexdec(uniqid());
-        $ext=strtolower($image->getClientOriginalExtension());
-        $image_full_name=$image_name.'.'.$ext;
-        $upload_path='images/cars/';
-        $image_url=$upload_path.$image_full_name;
-        $success=$image->move($upload_path,$image_full_name);
-        $data['car_image']=$image_url;
-        unlink($request->old_photo);
-        DB::table('boverviews')->where('id',$id)->update($data);
-        $notification=array(
-            'message'=>'Data updated Successfully',
-            'alert-type'=>'success'
-        );
-        return redirect()->route('allcaroverview')->with($notification);
-      }
-      else{
-        $data['car_image']=$request->old_photo;
-       DB::table('boverviews')->where('id',$id)->update($data);
+    $data['launched']=$request->launched;
+    DB::table('boverviews')->where('id',$id)->update($data);
        $notification=array(
            'message'=>'Data updated Successfully',
            'alert-type'=>'success'
        );
        return redirect()->route('allcaroverview')->with($notification);
-      }
-
   }
 
   public function search(Request $request)

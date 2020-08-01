@@ -11,13 +11,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add Cars Overview</h1>
+                    <h1>Edit Cars Details</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item">Cars Overviews</li>
-                        <li class="breadcrumb-item active">Addcars</li>
+                        <li class="breadcrumb-item">Cars Details</li>
+                        <li class="breadcrumb-item active">Edit</li>
                     </ol>
                 </div>
             </div>
@@ -50,7 +50,7 @@
 
 
 
-        <form action="{{ url('/admin/brands/singlecar/update') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('/admin/brands/singlecar/update/'.$singlecar->id) }}" method="post" enctype="multipart/form-data">
             @csrf
 
             <div class="card card-info">
@@ -1148,20 +1148,18 @@
                                 <input type="text" class="form-control text-size" value="{{ $singlecar->acceleration_t }}" name="acceleration_t">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 offset-3 my-2" style="margin-top:8px;">
+                        <div class="col-md-3" style="margin-top:8px;">
                             <div class="floating-label-form-group">
-                                <label>New Image</label>
+                                <label for="exampleInputFile"> New Image </label>
+                                <input type="file" class="form-control text-size" name="car_image">
                                 <br>
-                                <input type="file" class="form-control" name="single_car_image">
-                                <label>Previous Image:</label> <img src="{{ URL::to($singlecar->single_car_image) }}" style="height:120px; width:120px;" alt="">
-                         <input type="hidden" name="old_photo" value="{{ $singlecar->single_car_image }}">
+                                <label>Previous Image:</label> <img src="{{ URL::to($singlecar->car_image) }}" style="height:120px; width:120px;" alt="">
+                                <input type="hidden" name="old_photo" value="{{ $singlecar->car_image }}">
                             </div>
 
                         </div>
                     </div>
+
 
 
 

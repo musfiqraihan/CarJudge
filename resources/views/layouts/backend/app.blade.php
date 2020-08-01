@@ -27,6 +27,10 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"  media="screen">
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -50,6 +54,12 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ route('allcaroverview') }}" class="nav-link">Overview</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+      <a href="{{ route('allsinglecar') }}" class="nav-link">Car Details</a>
+    </li>
+      <li class="nav-item d-none d-sm-inline-block float-right">
+        <a href="{{ route('logout') }}" class="nav-link">Logout</a>
       </li>
 
     </ul>
@@ -171,6 +181,17 @@
           </li>
 
 
+          <li class="nav-item">
+                      <a href="{{ route('user') }}" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <p>
+                          Register Users
+                        </p>
+                      </a>
+                    </li>
+
+
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -224,6 +245,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('backend')}}/dist/js/demo.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script>
     @if(Session::has('message'))
         var type="{{Session::get('alert-type','info')}}"

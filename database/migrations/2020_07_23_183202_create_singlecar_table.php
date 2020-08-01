@@ -15,15 +15,15 @@ class CreateSinglecarTable extends Migration
     {
         Schema::create('singlecar', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('single_car_image')->nullable;
             $table->integer('brands_id');
             $table->integer('car_model_id');
+            $table->string('car_image')->nullable;
             $table->string('fuel_type',100);
             $table->string('engine',100);
             $table->integer('car_price');
             $table->string('body_type',100);
             $table->string('transmission',100);
-            $table->string('seat',100);
+            $table->integer('seat');
             $table->integer('year');
             $table->string('max_power',100);
             $table->string('boot_space',100);

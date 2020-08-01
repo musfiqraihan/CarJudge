@@ -33,18 +33,28 @@
 
 
 
-      <form action="{{ route('storesinglecar') }}" method="post" enctype="multipart/form-data">
+      <form action="{{ route('caroverviewstore') }}" method="post" enctype="multipart/form-data">
         @csrf
       <div class="card card-info">
 
           <div class="card-body">
                 <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
+                          <!-- Error message -->
+                          @if ($errors->any())
+                          <div class="alert alert-danger">
+                          <ul>
+                          @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                          @endforeach
+                          </ul>
+                          </div>
+                          @endif
 
 
                           <div class="row">
 
-                            <div class="col-md-4 mr-3 my-2">
+                            <div class="col-md-4 my-2">
                               <div class="floating-label-form-group">
                           <label>Choose Car Brand</label>
                           <br>
@@ -58,86 +68,21 @@
                             </div>
                             <div class="col-md-4 my-2">
                               <div class="floating-label-form-group">
-                                <label>Car Model</label> <small>(must be unique)</small>
+                                <label>Car Model</label>
                           <br>
                             <input type="text" value="{{ old('car_model') }}" class="form-control text-size" name="car_model">
                         </div>
                               </div>
-                          </div>
 
 
-
-
-                                <div class="row">
-                                   <div class="col-md-4 ml-1 mr-3 my-2">
-                                     <div class="floating-label-form-group">
-                                       <label>Car Price</label> <small>(5-8 figure)</small>
-                                       <br>
-                                         <input type="text" class="form-control text-size" value="{{ old('car_price') }}" name="car_price">
-                                     </div>
-                                        </div>
-
-                                  <div class="col-md-4 my-2">
-                                    <div class="floating-label-form-group">
-                                      <label>Body Type</label>
-                                          <br>
-                                            <input type="text" class="form-control text-size" value="{{ old('body_type') }}" name="body_type">
-                                        </div>
-                                       </div>
-                                </div>
-
-                                <div class="row">
-                                   <div class="col-md-4 ml-1 mr-3 my-2">
-                                     <div class="floating-label-form-group">
-                                       <label>Transmission</label>
-                                          <br>
-                                            <input type="text" class="form-control text-size" value="{{ old('transmission') }}" name="transmission">
-                                        </div>
-                                        </div>
-
-                                  <div class="col-md-4 my-2">
-                                    <div class="floating-label-form-group">
-                                      <label>Fuel</label>
-                                          <br>
-                                            <input type="text" class="form-control text-size" value="{{ old('fuel') }}" name="fuel">
-                                        </div>
-                                       </div>
-                                </div>
-
-                                <div class="row">
-                                   <div class="col-md-4 ml-1 mr-3 my-2">
-                                     <div class="floating-label-form-group">
-                                       <label>Year</label>
-                                          <br>
-                                            <input type="text" class="form-control text-size" value="{{ old('year') }}" name="year">
-                                        </div>
-                                        </div>
-                                  <div class="col-md-4 my-2">
-                                    <div class="floating-label-form-group">
-                                      <label>Engine cc</label>
-                                          <br>
-                                            <input type="text" class="form-control text-size" value="{{ old('engine') }}" name="engine">
-                                        </div>
-                                       </div>
-                                </div>
-
-                                <div class="row">
-                                   <div class="col-md-4 ml-1 mr-3 my-2">
-                                     <div class="floating-label-form-group">
-                                       <label>Seat no</label>
-                                        <br>
-                                          <input type="text" class="form-control text-size" value="{{ old('seat') }}" name="seat">
-                                      </div>
-                                        </div>
-                                  <div class="col-md-4" style="margin-top:8px;">
-                                    <div class="floating-label-form-group">
-                                    <label>Car Image</label>
-                                          <br>
-                                    <input type="file" class="form-control" name="car_image">
-                                            </div>
-
-                                       </div>
-                                </div>
+                          <div class="col-md-4 my-2">
+                            <div class="floating-label-form-group">
+                              <label>Launched</label>
+                              <br>
+                                <input type="text" class="form-control text-size" value="{{ old('launched') }}" name="launched">
+                            </div>
+                               </div>
+                       </div>
 
 
 
@@ -161,24 +106,10 @@
            </div>
 
 
-                        <div class="col-md-3">
-                          <!-- Success message -->
-                               @if(Session::has('success'))
-                                   <div class="alert alert-success">
-                                       {{Session::get('success')}}
-                                   </div>
-                               @endif
-                          <!-- Error message -->
-                          @if ($errors->any())
-                          <div class="alert alert-danger">
-                          <ul>
-                          @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                          @endforeach
-                          </ul>
-                          </div>
-                          @endif
-                        </div>
+
+
+
+
 
 
 

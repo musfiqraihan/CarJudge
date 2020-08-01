@@ -53,6 +53,7 @@
                 </td>
                 <td>Car Image</td>
                 <td>
+                    <img src="{{ URL::to($singlecar->single_car_image) }}" style="height:200px;" class="card-img-top car-img" alt="">
                 </td>
                 <td>
                     <img src="" style="height:200px;" class="card-img-top car-img" alt="">
@@ -61,7 +62,7 @@
 
             <tr>
                 <td>Car Model</td>
-                <td></td>
+                <td>{{ $singlecar->car_model }}</td>
                 <td></td>
             </tr>
 

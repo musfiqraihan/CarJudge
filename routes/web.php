@@ -16,8 +16,15 @@ use Illuminate\Support\Facades\Route;
 //welcome page=====================
 Route::get('/','HomeController@home');
 Route::get('/brands/cardetails/{id}', 'CarDetailsController@details');
-Route::get('/car/search', 'frontend\CarSearchController@search');
 Route::post('/home/subscribe', 'SubscribeController@subscribe');
+Route::get('/car/search', 'frontend\CarSearchController@search');
+
+//json data pass
+Route::get('/getmodels/{id}', 'frontend\CarSearchController@getmodels');
+Route::get('/getyears/{id}', 'frontend\CarSearchController@getyears');
+
+//json data pass for admin single car
+Route::get('/admingetmodels/{id}', 'backend\SingleCarController@getadminmodels');
 
 
 //frontend side start ===============
@@ -30,6 +37,8 @@ Route::get('/services', 'frontend\ServiceController@services')->name('service_pa
 
 //compare page==============
 Route::get('/compares', 'frontend\CompareController@compares')->name('compare_page');
+Route::get('/compares/search', 'frontend\CompareController@search1');
+Route::get('/compares/search', 'frontend\CompareController@search2');
 
 //contact page==============
 Route::get('/contacts', 'frontend\ContactController@contacts')->name('contact_page');
@@ -67,6 +76,9 @@ Route::get('/admin/dashboard', 'backend\AdminController@dashboard')->name('dashb
 Route::get('/admin/dashboard/search', 'backend\AdminController@search');
 
 
+//admin register user=========================
+Route::get('/admin/user', 'backend\UserController@dashboard')->name('user');
+Route::get('/admin/users/search', 'backend\UserController@userssearch');
 
 
 //admin brand push panel=============================
@@ -114,6 +126,6 @@ Route::get('/admin/brands/singlecar/delete/{id}', 'backend\SingleCarController@d
 
 Route::get('/admin/brands/singlecar/edit/{id}', 'backend\SingleCarController@editcar');
 
-Route::get('/admin/brands/singlecar/update', 'backend\SingleCarController@updatecar');
+Route::post('/admin/brands/singlecar/update/{id}', 'backend\SingleCarController@updatecar');
 
 Route::get('/admin/brands/singlecar/allcars/search', 'backend\SingleCarController@searchcar');

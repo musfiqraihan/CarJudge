@@ -18,7 +18,7 @@
 <!---adding image---->
 <div class="row py-5">
   <div class="col-md-5">
-    <img src="{{ URL::to($singlecar->single_car_image) }}" style="height:300px;width:400px;" alt="">
+    <img src="{{ URL::to($singlecar->car_image) }}" style="height:300px;width:400px;" alt="">
   </div>
   <div class="col-md-4">
           <h3>{{ $singlecar->car_model }}</h3>

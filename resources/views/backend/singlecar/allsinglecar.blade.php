@@ -93,7 +93,7 @@
             <td>{{ $row->max_power }}</td>
             <td>{{ $row->year }}</td>
             <td>{{ $row->seat }}</td>
-            <td><img src="{{ URL::to($row->single_car_image) }}" style="width:70px; height:60px;" alt=""></td>
+            <td><img src="{{ URL::to($row->car_image) }}" style="width:70px; height:60px;" alt=""></td>
             <td>
               <a href="{{ url('/admin/brands/singlecar/edit/'.$row->id) }}" class="btn btn-sm btn-info">Edit</a>
               <a href="{{ url('/admin/brands/singlecar/'.$row->id) }}" class="btn btn-sm btn-success">View</a>

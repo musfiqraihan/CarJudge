@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add Cars Overview</h1>
+                    <h1>Add Cars Details</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item">Cars Overviews</li>
+                        <li class="breadcrumb-item">Cars Details</li>
                         <li class="breadcrumb-item active">Addcars</li>
                     </ol>
                 </div>
@@ -36,24 +36,19 @@
 
 
 
-                              <div class="">
-                                <!-- Success message -->
-                                     @if(Session::has('success'))
-                                         <div class="alert alert-success">
-                                             {{Session::get('success')}}
-                                         </div>
-                                     @endif
-                                <!-- Error message -->
-                                @if ($errors->any())
-                                <div class="alert alert-danger">
-                                <ul>
-                                @foreach ($errors->all() as $error)
-                                  <li>{{ $error }}</li>
-                                @endforeach
-                                </ul>
-                                </div>
-                                @endif
-                              </div>
+        <div class="">
+
+            <!-- Error message -->
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </div>
 
 
 
@@ -75,7 +70,7 @@
                             <div class="floating-label-form-group">
                                 <label>Choose Car Brand</label>
                                 <br>
-                                <select class="form-control text-size" name="brands_id">
+                                <select class="form-control text-size" id="brands_id" name="brands_id">
                                     <option>Select</option>
                                     @foreach ($brands as $row)
                                     <option value="{{ $row->id }}">{{ $row->name }}</option>
@@ -88,8 +83,8 @@
                             <div class="floating-label-form-group">
                                 <label>Choose Car Model</label>
                                 <br>
-                                <select class="form-control text-size" name="car_model_id">
-                                    <option>Select</option>
+                                <select class="form-control text-size" id="car_model_id" name="car_model_id">
+                                    <option disabled="" selected="">Select</option>
                                     @foreach ($boverviews as $row)
                                     <option value="{{ $row->id }}">{{ $row->car_model }}</option>
                                     @endforeach
@@ -118,6 +113,9 @@
 
 
                     </div>
+
+
+
 
 
 
@@ -1152,28 +1150,25 @@
                                 <input type="text" class="form-control text-size" value="{{ old('acceleration_t') }}" name="acceleration_t">
                             </div>
                         </div>
+
+                        <div class="col-md-3 " style="margin-top:8px;">
+                            <div class="floating-label-form-group">
+                                <label for="exampleInputFile"> Add car Image </label>
+                                <input type="file" class="form-control text-size" name="car_image">
+
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6 offset-3 my-2" style="margin-top:8px;">
-                            <div class="floating-label-form-group">
-                                <label>Car Image</label>
-                                <br>
-                                <input type="file" class="form-control" name="single_car_image">
-                            </div>
 
+
+                    <div class="row py-3">
+                        <div class="col-md-12" style="margin-left:400px;">
+                            <button type="submit" class="btn btn-success btn-lg mr-3">SUBMIT</button>
+                            <a href="{{ route('allsinglecar') }}" class="btn btn-danger btn-lg">CANCEL</a>
                         </div>
                     </div>
-
-
-
-
-                            <div class="row">
-                                <div class="col-md-12" style="margin-left:400px;">
-                                    <button type="submit" class="btn btn-success btn-lg mr-3">SUBMIT</button>
-                                    <a href="{{ route('dashboard') }}" class="btn btn-danger btn-lg">CANCEL</a>
-                                </div>
-                            </div>
 
 
 
@@ -1189,6 +1184,40 @@
 
 
 
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+
+                jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
+
+
+                jQuery('select[name="brands_id"]').on('change', function() {
+                    var BrandID = jQuery(this).val();
+                    if (BrandID) {
+                        jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
+
+                        jQuery.ajax({
+                            url: '/admingetmodels/' + BrandID,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                jQuery('select[name="car_model_id"]').empty();
+                                $('select[name="car_model_id"]').append('<option selected="" disabled="">Select</option>');
+                                jQuery.each(data, function(key, value) {
+                                    $('select[name="car_model_id"]').append('<option value="' + key + '">' + value + '</option>');
+                                });
+                                jQuery('select[name="car_model_id"]').removeAttr('disabled');
+                            }
+                        });
+
+                    } else {
+                        $('select[name="car_model_id"]').empty();
+
+                    }
+                });
+
+
+            });
+        </script>
 
 
 

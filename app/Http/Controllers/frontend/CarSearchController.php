@@ -8,15 +8,30 @@ use DB;
 
 class CarSearchController extends Controller
 {
-    public function search(Request $request)
-    {
-      $carsearch = $request->get('carsearch');
-      $singlecar = DB::table('singlecar')
-      ->join('brands','singlecar.brands_id','brands.id')
-      ->join('boverviews','singlecar.car_model_id','boverviews.id')
-      ->where('boverviews.car_model','like','%'.$carsearch.'%')
-      ->first();
+    public function getmodels($id)
+  {
+    $boverviews = DB::table('boverviews')
+    ->where('brands_id',$id)
+    ->pluck("car_model","id");
+    return json_encode($boverviews);
+  }
+  public function getyears($id)
+  {
+    $singlecar = DB::table('singlecar')
+    ->where('car_model_id',$id)
+    ->pluck("year","id");
+    return json_encode($singlecar);
+  }
 
-       return view('frontend.cardetails.cardetails',compact('singlecar'));
-    }
+  public function search(Request $request)
+  {
+    $singlecar = DB::table('singlecar')
+    ->join('brands','singlecar.brands_id','brands.id')
+    ->join('boverviews','singlecar.car_model_id','boverviews.id')
+    ->select('singlecar.*','brands.name','boverviews.car_model')
+    ->where('singlecar.id',$id)
+    ->first();
+      return view('frontend.cardetails.cardetails',compact('singlecar'));
+  }
+
 }

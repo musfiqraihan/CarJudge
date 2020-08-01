@@ -10,20 +10,21 @@ class SingleCarController extends Controller
 {
     public function addcar()
     {
-      $brands=DB::table('brands')->get();
-      $boverviews=DB::table('boverviews')->get();
+      $brands = DB::table('brands')->get();
+      $boverviews = DB::table('boverviews')->get();
       return view('backend.singlecar.addsinglecar',compact('brands','boverviews'));
     }
 
     public function storecar(Request $request)
     {
       $validatedData = $request->validate([
+        'car_image'=>'required | mimes:png,PNG,jpg,JPG,jpeg,JPEG|max:1000',
         'fuel_type'=>'required|max:50',
         'engine'=>'required|max:50',
         'car_price'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6|max:8',
         'body_type'=>'required|max:50',
         'transmission'=>'required|max:50',
-        'seat'=>'regex:/^([2-8\s\-\+\(\)]*)$/',
+        'seat'=>'regex:/^([2-8\s\-\+\(\)]*)$/|min:1|max:2',
         'year'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:4|max:4',
         'max_power'=>'required|max:50',
         'boot_space'=>'required|max:50',
@@ -131,12 +132,12 @@ class SingleCarController extends Controller
         'front_brake'=>'required|max:50',
         'rear_brake'=>'required|max:50',
         'top_speed'=>'required|max:50',
-        'acceleration_t'=>'required|max:50',
-        'single_car_image'=>'required | mimes:png,PNG,jpg,JPG,jpeg,JPEG|max:1000'
+        'acceleration_t'=>'required|max:50'
       ]);
       $data=array();
       $data['brands_id']=$request->brands_id;
       $data['car_model_id']=$request->car_model_id;
+      $data['car_image']=$request->car_image;
       $data['fuel_type']=$request->fuel_type;
       $data['engine']=$request->engine;
       $data['car_price']=$request->car_price;
@@ -251,31 +252,33 @@ class SingleCarController extends Controller
       $data['rear_brake']=$request->rear_brake;
       $data['top_speed']=$request->top_speed;
       $data['acceleration_t']=$request->acceleration_t;
-      $image = $request->file('single_car_image');
+      $image = $request->file('car_image');
         if ($image) {
           $image_name=hexdec(uniqid());
           $ext=strtolower($image->getClientOriginalExtension());
           $image_full_name=$image_name.'.'.$ext;
-          $upload_path='images/singlecar/';
+          $upload_path='images/cars/';
           $image_url=$upload_path.$image_full_name;
           $success=$image->move($upload_path,$image_full_name);
-          $data['single_car_image']=$image_url;
+          $data['car_image']=$image_url;
           DB::table('singlecar')->insert($data);
           $notification=array(
-              'message'=>'Data inserted Successfully',
+              'message'=>'Successfully inserted data',
               'alert-type'=>'success'
           );
-          return redirect()->route('dashboard')->with($notification);
+          return redirect()->route('allsinglecar')->with($notification);
         }
         else{
           DB::table('singlecar')->insert($data);
           $notification=array(
-              'message'=>'Data inserted Successfully',
+              'message'=>'Successfully inserted data',
               'alert-type'=>'success'
           );
-          return redirect()->route('dashboard')->with($notification);
+          return redirect()->route('allsinglecar')->with($notification);
         }
-     }
+
+  }
+
 
      public function allcar()
      {
@@ -301,24 +304,23 @@ class SingleCarController extends Controller
 public function deletecar($id)
 {
   $singlecar=DB::table('singlecar')->where('id',$id)->first();
-  $image=$singlecar->single_car_image;
+  $image = $singlecar->car_image;
 
   $delete=DB::table('singlecar')->where('id',$id)->delete();
   if ($delete) {
     unlink($image);
     $notification=array(
-      'message'=>'Successfully Deleted!',
-      'alert-type'=>'success'
+        'message'=>'Deleted Successfully',
+        'alert-type'=>'success'
     );
     return redirect()->back()->with($notification);
+
   }else{
-    $notification=array(
-      'message'=>'Something wrong!',
-      'alert-type'=>'error'
-    );
-    return redirect()->back()->with($notification);
+    return back()->with('error', 'Something wrong -_-');
   }
 }
+
+
 
 public function editcar($id)
 {
@@ -331,12 +333,13 @@ public function editcar($id)
 public function updatecar(Request $request,$id)
 {
   $validatedData = $request->validate([
+    'car_image'=>'mimes:png,PNG,jpg,JPG,jpeg,JPEG|max:1000',
     'fuel_type'=>'max:50',
     'engine'=>'max:50',
     'car_price'=>'regex:/^([0-9\s\-\+\(\)]*)$/|min:6|max:8',
     'body_type'=>'max:50',
     'transmission'=>'max:50',
-    'seat'=>'regex:/^([2-8\s\-\+\(\)]*)$/',
+    'seat'=>'regex:/^([0-9\s\-\+\(\)]*)$/|min:1|max:2',
     'year'=>'regex:/^([0-9\s\-\+\(\)]*)$/|min:4|max:4',
     'max_power'=>'max:50',
     'boot_space'=>'max:50',
@@ -444,12 +447,13 @@ public function updatecar(Request $request,$id)
     'front_brake'=>'max:50',
     'rear_brake'=>'max:50',
     'top_speed'=>'max:50',
-    'acceleration_t'=>'max:50',
-    'single_car_image'=>'mimes:png,PNG,jpg,JPG,jpeg,JPEG|max:1000'
+    'acceleration_t'=>'max:50'
+
   ]);
   $data=array();
   $data['brands_id']=$request->brands_id;
   $data['car_model_id']=$request->car_model_id;
+  $data['car_image']=$request->car_image;
   $data['fuel_type']=$request->fuel_type;
   $data['engine']=$request->engine;
   $data['car_price']=$request->car_price;
@@ -564,35 +568,34 @@ public function updatecar(Request $request,$id)
   $data['rear_brake']=$request->rear_brake;
   $data['top_speed']=$request->top_speed;
   $data['acceleration_t']=$request->acceleration_t;
-  $image = $request->file('single_car_image');
+  $image = $request->file('car_image');
     if ($image) {
       $image_name=hexdec(uniqid());
       $ext=strtolower($image->getClientOriginalExtension());
       $image_full_name=$image_name.'.'.$ext;
-      $upload_path='images/singlecar/';
+      $upload_path='images/cars/';
       $image_url=$upload_path.$image_full_name;
       $success=$image->move($upload_path,$image_full_name);
-      $data['single_car_image']=$image_url;
+      $data['car_image']=$image_url;
       unlink($request->old_photo);
       DB::table('singlecar')->where('id',$id)->update($data);
       $notification=array(
-          'message'=>'Successfully edited data!',
+          'message'=>'Data updated Successfully',
           'alert-type'=>'success'
       );
-      return redirect()->route('dashboard')->with($notification);
+      return redirect()->route('allsinglecar')->with($notification);
     }
     else{
-      $data['image']=$request->old_photo;
-      DB::table('singlecar')->where('id',$id)->update($data);
-      $notification=array(
-        'message'=>'Successfully edited data!',
-        'alert-type'=>'success'
-      );
-      return redirect()->route('dashboard')->with($notification);
-
+      $data['singlecar']=$request->old_photo;
+     DB::table('boverviews')->where('id',$id)->update($data);
+     $notification=array(
+         'message'=>'Data updated Successfully',
+         'alert-type'=>'success'
+     );
+     return redirect()->route('allsinglecar')->with($notification);
     }
-}
 
+  }
 
     public function searchcar(Request $request)
     {
@@ -600,7 +603,16 @@ public function updatecar(Request $request,$id)
       $singlecar = DB::table('singlecar')
       ->join('brands','singlecar.brands_id','brands.id')
       ->join('boverviews','singlecar.car_model_id','boverviews.id')
-      ->where('boverviews.car_model','like','%'.$search.'%')->paginate(5);
+      ->where('boverviews.car_model','like','%'.$search.'%')->get();
       return view('backend.singlecar.allsinglecar',compact('singlecar'));
     }
+
+
+    public function getadminmodels($id)
+     {
+    $boverviews = DB::table('boverviews')
+    ->where('brands_id',$id)
+    ->pluck("car_model","id");
+    return json_encode($boverviews);
+     }
 }

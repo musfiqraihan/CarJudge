@@ -28,65 +28,9 @@
    <!---font---->
    <script src="{{ asset('js/all.js') }}"></script>
 
-<style media="screen">
-
-
-
-
-
-#button {
-  display: inline-block;
-  background-color: #FF9800;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  border-radius: 4px;
-  margin: 30px;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  transition: background-color .3s;
-  z-index: 1000;
-}
-#button:hover {
-  cursor: pointer;
-  background-color: #333;
-}
-#button:active {
-  background-color: #555;
-}
-#button::after {
-  content: "\f077";
-  font-family: FontAwesome;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 2em;
-  line-height: 50px;
-  color: #fff;
-}
 </style>
 <script src=”https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js”></script>
-<script type="text/javascript">
 
-jQuery(document).ready(function() {
-
-  var btn = $('#button');
-
-  $(window).scroll(function() {
-    if ($(window).scrollTop() > 300) {
-      btn.addClass('show');
-    } else {
-      btn.removeClass('show');
-    }
-  });
-
-  btn.on('click', function(e) {
-    e.preventDefault();
-    $('html, body').animate({scrollTop:0}, '300');
-  });
-
-});
-</script>
 
 
  </head>
@@ -105,36 +49,19 @@ jQuery(document).ready(function() {
 
 
 
-       <!--- top header start--->
-       <header>
-       <div class="head">
-           <p class="new">New Arrival</p>
-
-           <marquee  class="newshow" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
-           <a target="_blank" href="" style="text-decoration:none;color:white;"><i class="fas fa-dot-circle color-font"></i> Mercedes-Benz CLA-Class AMG
-           </a>
-           <a target="_blank" href="" style="text-decoration:none;color:white;"><i class="fas fa-dot-circle color-font"></i> Tata Tiago
-            </a>
-           <a target="_blank" href="" style="text-decoration:none;color:white;"><i class="fas fa-dot-circle color-font"></i> Toyota Land Cruiser prado txl
-           </a>
-           </marquee>
-
-         </div>
-
-       <!--- top header end--->
-      </header>
 
        <!---nav element---->
-       <nav class="navbar navbar-expand-md navbar-light shadow-sm">
+       <nav class="navbar navbar-expand-md navbar-light shadow-sm fixed-top" style="opacity:0.9">
          <div class="container">
          <img style="height:40px;weight:40px;" src="{{ URL::to('images/logo.png') }}">
          <a class="navbar-brand ml-2"  href="{{ url('/') }}">CarJudge</a>
-       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"  aria-expanded="false" >
          <span class="navbar-toggler-icon"></span>
        </button>
+
        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-         <ul class="navbar-nav mx-auto">
+         <ul class="nav navbar-nav mx-auto">
            <li class="nav-item">
              <a class="nav-link text-capitalize" href="{{ route('brand_page') }}">brands</a>
            </li>
@@ -155,10 +82,6 @@ jQuery(document).ready(function() {
 
        <!--social icons-->
 <div class="nav-icons d-none d-lg-block">
-
-
-
-
 
 <!---user icon--->
         @guest()
@@ -330,20 +253,21 @@ jQuery(document).ready(function() {
 
       <!---jquery---->
       <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-      <script src="{{asset('backend')}}/dist/js/adminlte.js"></script>
       <!----script js---->
       <script src="{{ asset('js/script.js') }}"></script>
-
-
-      <script src="{{ asset('js/navbar-fixed.js') }}"></script>
       <!----bootstrap js---->
       <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+
+      <script src="{{asset('backend')}}/dist/js/adminlte.js"></script>
+
+
+
 
       <script src="{{ asset('js/select2.full.min') }}"></script>
 
 
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
   @if(Session::has('message'))
       var type="{{Session::get('alert-type','info')}}"
@@ -363,6 +287,7 @@ jQuery(document).ready(function() {
       }
       @endif
 </script>
+
 
 
 
