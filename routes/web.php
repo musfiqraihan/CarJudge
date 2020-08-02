@@ -17,12 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','HomeController@home');
 Route::get('/brands/cardetails/{id}', 'CarDetailsController@details');
 Route::post('/home/subscribe', 'SubscribeController@subscribe');
-Route::get('/car/search', 'frontend\CarSearchController@search');
 
-//json data pass
+//car specific car for welcome page
+Route::get('/getData/{id}', 'frontend\CarSearchController@getData')->name('getData');
+
+
+
+//json data pass for searching option
 Route::get('/getmodels/{id}', 'frontend\CarSearchController@getmodels');
 Route::get('/getyears/{id}', 'frontend\CarSearchController@getyears');
-
 //json data pass for admin single car
 Route::get('/admingetmodels/{id}', 'backend\SingleCarController@getadminmodels');
 
@@ -37,8 +40,7 @@ Route::get('/services', 'frontend\ServiceController@services')->name('service_pa
 
 //compare page==============
 Route::get('/compares', 'frontend\CompareController@compares')->name('compare_page');
-Route::get('/compares/search', 'frontend\CompareController@search1');
-Route::get('/compares/search', 'frontend\CompareController@search2');
+
 
 //contact page==============
 Route::get('/contacts', 'frontend\ContactController@contacts')->name('contact_page');

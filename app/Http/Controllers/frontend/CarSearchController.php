@@ -23,7 +23,7 @@ class CarSearchController extends Controller
     return json_encode($singlecar);
   }
 
-  public function search(Request $request)
+  public function getData($id)
   {
     $singlecar = DB::table('singlecar')
     ->join('brands','singlecar.brands_id','brands.id')

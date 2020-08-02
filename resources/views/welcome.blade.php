@@ -12,10 +12,10 @@
                 <div class="modal-content bg-light">
 
                     <div class="modal-body">
-                        <form action="{{ url('/car/search') }}" method="get" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
 
+
+                            <div class="row">
+                              @csrf
                                 <div class="col-md-4">
                                     <div class="floating-label-form-group">
                                         <label>Choose Brand</label>
@@ -62,7 +62,7 @@
                             <div class="row">
 
                                 <div class="col-md-9" style="margin-top:15px;">
-                                    <button type="submit" name="carsearch" class="btn btn-success btn-block" style="font-size:16px;">Search</button>
+                                    <button type="submit" name="search" id="search" class="btn btn-success btn-block" style="font-size:16px;">Search</button>
                                 </div>
                                 <div class="col-md-3" style="margin-top:10px;">
 
@@ -73,7 +73,7 @@
 
                             </div>
 
-                        </form>
+                      
 
                     </div>
                 </div>
@@ -164,7 +164,15 @@
     </script>
 
 
+<script type="text/javascript">
+  $("#search").on("click",function(){
+    var link = document.getElementById("year").value;
 
+    $.ajax({
+      url:window.location.href="/getData/"+link
+    });
+  });
+</script>
 
 
 
