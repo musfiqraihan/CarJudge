@@ -39,7 +39,9 @@ Route::get('/brands', 'frontend\BrandsController@brands')->name('brand_page');
 Route::get('/services', 'frontend\ServiceController@services')->name('service_page');
 
 //compare page==============
-Route::get('/compares', 'frontend\CompareController@compares')->name('compare_page');
+// Route::get('/compares', 'frontend\CompareController@compares')->name('compare_page');
+Route::resource('column-searching','ColumnSeachingController');
+
 
 
 //contact page==============
@@ -49,7 +51,10 @@ Route::post('/contacts', 'frontend\ContactController@collect');
 
 //review page==============
 Route::get('/reviews', 'frontend\ReviewController@reviews')->name('review_page');
-
+Route::get('/carsdetails/reviews/{id}', 'frontend\ReviewController@postreviews');
+Route::post('/carsdetails/process-reviews', 'frontend\ReviewController@process');
+Route::get('/carsdetails/reviews/show/{id}', 'frontend\ReviewController@showreviews');
+Route::get('/carsdetails/reviews/individual/{id}', 'frontend\ReviewController@individualreviews');
 
 
 //user login and registration==================

@@ -3,12 +3,12 @@
 @section('content')
 
 
-<div class="table-responsive mt-5">
+<div class="table-responsive mt-4">
     <table class="table table-bordered table-striped" id="product_table">
         <thead>
             <tr>
-                <th style="width: 10%"></th>
-                <th style="width: 12%"></th>
+                <th style="width: 10%">Sr. No.</th>
+                <th style="width: 12%">Engine</th>
                   @csrf
                 <th style="width: 39%">
                     <div class="form-group">
@@ -23,8 +23,9 @@
                     </div>
                 </th>
 
-                <th style="width: 39%">
-                    <div class="form-group">
+                <th style="width: 39%">Car Price
+
+                    {{-- <div class="form-group">
                         <label>Choose Car Model</label>
                         <select class="form-control select2 select2-hidden-accessible" name="" style="width: 100%;" aria-hidden="true">
                             <option selected="" disabled="">select</option>
@@ -33,66 +34,103 @@
                             @endforeach
                         </select>
                         <button type="submit" class="btn btn-success btn-block btn-sm my-2" name="button">Submit</button>
-                    </div>
+                    </div> --}}
                 </th>
 
             </tr>
         </thead>
-
-{{--
-<script type="text/javascript">
-  $(document).ready(function(){
-    function fetch_data(brands = ''){
-      $('#product_table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax:{
-          url:"{{ route('compare_page') }}",
-          data: {brands:brands}
-        },
-
-      });
-    }
-  });
-</script> --}}
+      </table>
+      </div>
 
 
 
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-    jQuery('select[name="car_model_id"]').on('change', function() {
-            var modelID = jQuery(this).val();
-            if (modelID) {
-                jQuery.ajax({
-                    url: '/getmodels/' + modelID,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-
-                    }
-                });
-
-            } else {
-                $('select[name="car_model_id"]').empty();
-            }
-        });
-
-
-    });
-
+       $(document).ready(function() {
+         $('select[name="car_model_id"]').on('change', function() {
+           var modelID = $(this).val();
+           if (modelID) {
+             $('#product_table').datatables({
+               processing: true,
+               serverSide: true,
+               $.ajax:{
+                 url:"{{ route('column-searching.index') }}",
+                 data: {'id': modelID }
+               },
+               columns:[
+                   {
+                    data: 'id',
+                    name: 'id'
+                   },
+                   {
+                    data: 'fuel_type',
+                    name: 'fuel_type'
+                   },
+                   {
+                    data: 'car_model',
+                    name: 'car_model',
+                    orderable: false
+                   },
+                   {
+                    data:'car_price',
+                    name:'car_price'
+                   }
+                  ]
+             });
+           }
+           else{
+             $('select[name="car_model_id"]').empty();
+           }
+         });
+       });
 </script>
 
 
 
 
+{{--
+<script>
+$(document).ready(function(){
+  $('#car_model_id').change(function(){
+   var model_id = $('#car_model_id').val();
+   if (model_id) {
+
+      $.ajax({
+      url:"{{ route('column-searching.index') }}",
+      data: {'id':model_id},
+     columns:[
+         {
+          data: 'id',
+          name: 'id'
+         },
+         {
+          data: 'fuel_type',
+          name: 'fuel_type'
+         },
+         {
+          data: 'car_model',
+          name: 'car_model',
+          orderable: false
+         },
+         {
+          data:'car_price',
+          name:'car_price'
+         }
+        ]
+     });
+
+    }else{
+      $('#car_model_id').empty();
+    }
+  });
+});
+
+</script> --}}
 
 
 
 
 
-
-
-<tbody>
+{{-- <tbody>
     <tr>
         <td rowspan="12">
             <h3>OVERVIEW</h3>
@@ -649,9 +687,11 @@
 
 
 
-</tbody>
-</table>
-</div>
+</tbody> --}}
+
+
+
+
 
 
 

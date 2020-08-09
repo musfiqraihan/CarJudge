@@ -1,32 +1,81 @@
 @extends('layouts/frontend/app')
 
 @section('content')
+  <?php
+  $conn = mysqli_connect("localhost","root","","carjudge");
+  $query = mysqli_query($conn,"SELECT AVG(orating) as AVGRATE from reviews where car_id = '". $singlecar->id ."'");
+       $row_rating = mysqli_fetch_array($query);
+        $AVGRATE=$row_rating['AVGRATE'];
+  $query = mysqli_query($conn,"SELECT count(orating) as Total from reviews where car_id = '". $singlecar->id ."'");
+      $row = mysqli_fetch_array($query);
+      $Total=$row['Total'];
+ ?>
+ <style media="screen">
+     .star-rating {
+         font-size: 1em;
+     }
 
+     .star-rating .fa-star {
+         color: var(--mainBlue);
+     }
+ </style>
 
-
-
-
-<section class="content">
+<section class="content my-5">
 
     <div class="container">
         <div class="row">
             <div class="col-12">
 
 
-<!---adding image---->
-<div class="row py-5">
-  <div class="col-md-6">
-    <img src="{{ URL::to($singlecar->car_image) }}" style="height:300px;width:500px;" alt="">
-  </div>
-  <div class="col-md-5">
-          <h3>{{ $singlecar->car_model }}</h3>
-          <h4>User rating</h4>
-          <h2>৳{{ $singlecar->car_price }}</h2>
-          <button type="button" class="btn btn-success btn-lg" name="button">Post Review</button>
-  </div>
-</div>
+                <!---adding image---->
+                <div class="row py-3">
+                    <div class="col-md-7">
+                        <img src="{{ URL::to($singlecar->car_image) }}" style="height:350px;width:600px;" alt="">
+                    </div>
+                    <div class="col-md-5">
+                        <br>
+                        <h3>{{ $singlecar->car_model }}</h3><br>
+                        <div class="star-rating">
+                            <span style="font-size:22px;color:blue;">  <?php echo round($AVGRATE,1); ?> </span><br>
+                            <span class="<?php if($AVGRATE >= 1){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="1" onclick="getOverall(1)"></span>
+                            <span class="<?php if($AVGRATE >= 2){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="2" onclick="getOverall(2)"></span>
+                            <span class="<?php if($AVGRATE >= 3){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="3" onclick="getOverall(3)"></span>
+                            <span class="<?php if($AVGRATE >= 4){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="4" onclick="getOverall(4)"></span>
+                            <span class="<?php if($AVGRATE >= 5){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="5" onclick="getOverall(5)"></span><br>
+
+               <small><?php echo $Total ?>&nbsp;reviews</small>
+                        </div>
+                        <a style="color:blue;text-decoration:none;" href="{{ url('/carsdetails/reviews/show/'.$singlecar->id) }}">See all reviews</a>
+                        <br><br>
+                        <h3 style="margin-top:4px;">৳&nbsp;{{ $singlecar->car_price }}</h3><br>
+                        <a href="{{ url('/carsdetails/reviews/'.$singlecar->id) }}" class="btn btn-success" style="color:white;">Post Review</a>
+                    </div>
+                </div>
 
 
+                {{-- <script type="text/javascript">
+    jQuery(document).ready(function() {
+    jQuery('select[name="car_model_id"]').on('change', function() {
+            var modelID = jQuery(this).val();
+            if (modelID) {
+                jQuery.ajax({
+                    url: '/getmodels/' + modelID,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        url:window.location.href="/compares/"+modelID
+                    }
+                });
+
+            } else {
+                $('select[name="car_model_id"]').empty();
+            }
+        });
+
+
+    });
+
+</script> --}}
 
 
 

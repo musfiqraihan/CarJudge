@@ -7,19 +7,26 @@
   <link rel="stylesheet" href="{{asset('backend')}}/dist/css/adminlte.min.css">
    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" media="all" />
    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" media="all" />
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}" media="all" />
+   <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}" media="all" />
    <link rel="stylesheet" type="text/css" href="{{ asset('css/navbar-fixed.css') }}" media="all" />
    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/font.css') }}" media="all" />
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
    <link rel="shortcut icon" type="image/x-icon"  href="{{ asset('images/favicon.ico') }}"/>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" type="text/css" href="{{ asset('css/select2.min.css') }}" media="all" />
-
-<!------ Include the above in your HEAD tag ---------->
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+   <!-- Latest compiled and minified JavaScript -->
+   <!------ Include the above in your HEAD tag ---------->
 
 <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"  media="screen">
 <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" defer ></script>
+ <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" defer ></script>
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+
 
 
    <title>Car Judge - Right Place To Find Cars</title>
@@ -66,7 +73,7 @@
              <a class="nav-link text-capitalize" href="{{ route('brand_page') }}">brands</a>
            </li>
            <li class="nav-item">
-             <a class="nav-link text-capitalize" href="{{ route('compare_page') }}">compare</a>
+             <a class="nav-link text-capitalize" href="{{ route('column-searching.index') }}">compare</a>
            </li>
            <li class="nav-item">
              <a class="nav-link text-capitalize" href="{{ route('service_page') }}">Service</a>
@@ -249,6 +256,7 @@
 
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
 
       <!---jquery---->

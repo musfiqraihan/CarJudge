@@ -61,7 +61,7 @@
                         <a class="nav-link text-capitalize" href="{{ route('brand_page') }}">brands</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-capitalize" href="{{ route('compare_page') }}">compare</a>
+                        <a class="nav-link text-capitalize" href="{{ route('column-searching.index') }}">compare</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-capitalize" href="{{ route('service_page') }}">Service</a>

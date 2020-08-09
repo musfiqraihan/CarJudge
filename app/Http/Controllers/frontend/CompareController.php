@@ -7,41 +7,16 @@ use Illuminate\Http\Request;
 use DB;
 class CompareController extends Controller
 {
+
   public function compares(Request $request)
   {
-    $brands = DB::table('brands')->get();
-    $boverviews = DB::table('boverviews')->get();
-    $singlecar = DB::table('singlecar')
-    ->join('brands','singlecar.brands_id','brands.id')
-    ->join('boverviews','singlecar.car_model_id','boverviews.id')
-    ->select('singlecar.*','brands.name','boverviews.car_model')
-    ->get();
-    return view('frontend.compares.compare',compact('singlecar','boverviews','brands'));
+      $singlecar = DB::table('singlecar')
+      ->join('brands','singlecar.brands_id','brands.id')
+      ->join('boverviews','singlecar.car_model_id','boverviews.id')
+      ->select('singlecar.*','brands.name','boverviews.car_model')
+      ->get();
+
+    return view('frontend.compares.compare',compact('singlecar'));
   }
-
-  public function getmodels($id)
-{
-  $boverviews = DB::table('boverviews')
-  ->where('brands_id',$id)
-  ->pluck("car_model","id");
-  return json_encode($boverviews);
-}
-  public function getyears($id)
-{
-  $singlecar = DB::table('singlecar')
-  ->where('car_model_id',$id)
-  ->pluck("year","id");
-  return json_encode($singlecar);
-}
-
-public function getData($id)
-{
-  $singlecar = DB::table('singlecar')
-  ->join('brands','singlecar.brands_id','brands.id')
-  ->join('boverviews','singlecar.car_model_id','boverviews.id')
-  ->select('singlecar.*','brands.name','boverviews.car_model')
-  ->where('singlecar.id',$id)
-  ->first();
-    return view('frontend.cardetails.cardetails',compact('singlecar'));
-   }
+  
 }

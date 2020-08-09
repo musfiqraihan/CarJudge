@@ -14,6 +14,6 @@ class CarDetailsController extends Controller
       ->select('singlecar.*','brands.name','boverviews.car_model')
       ->where('singlecar.id',$id)
       ->first();
-        return view('frontend.cardetails.cardetails',compact('singlecar'));
+  return view('frontend.cardetails.cardetails',compact('singlecar'));
     }
 }
