@@ -1,5 +1,11 @@
 @extends('layouts/backend/app')
 
+@section('title')
+  Car Judge - All car Details
+@endsection
+
+
+
 @section('content')
 
   <!-- Content Wrapper. Contains page content -->
@@ -13,8 +19,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Car Overviews</li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+              <li class="breadcrumb-item active">Car Details</li>
               <li>
                 <!-- SEARCH FORM -->
                 <form class="form-inline ml-3" action="{{ url('/admin/brands/singlecar/allcars/search') }}" method="get">
@@ -34,30 +40,7 @@
       </div><!-- /.container-fluid -->
     </section>
 
-
-
-
-  <!---start admin panel---->
-  <div class="container">
-
-
-    <div class="float-right">
-
-      <!-- Error message -->
-      @if ($errors->any())
-      <div class="alert alert-danger">
-      <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-      </ul>
-      </div>
-      @endif
-    </div>
-
-    </div>
-
-      <div class="row my-3">
+  <div class="row my-3">
 
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -105,25 +88,13 @@
 
         </table>
 
+{{ $singlecar->links() }}
 
 
 
          </div>
        </div>
     </div>
-
-
-
-  </div>
-
-
-
-
-
-
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
 
 

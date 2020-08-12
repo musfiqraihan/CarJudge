@@ -1,4 +1,8 @@
-@extends('layouts/frontend/app')
+@extends('layouts.frontend.header')
+
+@section('title')
+  Car Judge - {{ $singlecar->car_model }} Reviews here
+@endsection
 
 @section('content')
 

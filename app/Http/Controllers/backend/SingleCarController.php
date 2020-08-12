@@ -8,6 +8,16 @@ use DB;
 
 class SingleCarController extends Controller
 {
+
+  public function getadminmodels($id)
+   {
+  $boverviews = DB::table('boverviews')
+      ->where('brands_id',$id)
+      ->pluck("car_model","id");
+  return json_encode($boverviews);
+   }
+
+
     public function addcar()
     {
       $brands = DB::table('brands')->get();
@@ -286,7 +296,7 @@ class SingleCarController extends Controller
        ->join('brands','singlecar.brands_id','brands.id')
        ->join('boverviews','singlecar.car_model_id','boverviews.id')
        ->select('singlecar.*','brands.name','boverviews.car_model')
-       ->get();
+       ->paginate(5);
        return view('backend.singlecar.allsinglecar',compact('singlecar'));
      }
 
@@ -603,16 +613,10 @@ public function updatecar(Request $request,$id)
       $singlecar = DB::table('singlecar')
       ->join('brands','singlecar.brands_id','brands.id')
       ->join('boverviews','singlecar.car_model_id','boverviews.id')
-      ->where('boverviews.car_model','like','%'.$search.'%')->get();
+      ->where('boverviews.car_model','like','%'.$search.'%')->paginate(5);
       return view('backend.singlecar.allsinglecar',compact('singlecar'));
     }
 
 
-    public function getadminmodels($id)
-     {
-    $boverviews = DB::table('boverviews')
-    ->where('brands_id',$id)
-    ->pluck("car_model","id");
-    return json_encode($boverviews);
-     }
+
 }

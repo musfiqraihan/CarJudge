@@ -1,7 +1,10 @@
-@extends('layouts/frontend/app')
+@extends('layouts.frontend.header')
+
+@section('title')
+  Car Judge - Show All {{ $singlecar->car_model }} Reviews here
+@endsection
 
 @section('content')
-
 
 <style media="screen">
     .star-rating {

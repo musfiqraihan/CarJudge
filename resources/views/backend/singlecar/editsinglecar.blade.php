@@ -1,5 +1,10 @@
 @extends('layouts/backend/app')
 
+@section('title')
+  Car Judge - Edit car Details
+@endsection
+
+
 
 @section('content')
 
@@ -15,7 +20,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item">Cars Details</li>
                         <li class="breadcrumb-item active">Edit</li>
                     </ol>

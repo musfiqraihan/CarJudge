@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function dashboard(Request $request)
     {
-      $users=DB::table('users')->get();
+      $users=DB::table('users')->paginate(5);
         return view('backend.user.users',compact('users'));
     }
     public function userssearch(Request $request)

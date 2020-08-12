@@ -51,13 +51,6 @@
       </div>
       @endif
 
-      <!--  message -->
-           @if(session()->has('message'))
-               <div class="alert alert-{{ session('type') }}">
-                   {{ session('message') }}
-               </div>
-           @endif
-
 </div>
 
       <form action="{{ URL::to('/user/registration') }}" method="post">

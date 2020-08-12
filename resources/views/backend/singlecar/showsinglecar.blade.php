@@ -1,6 +1,11 @@
 @extends('layouts/backend/app')
 
 
+@section('title')
+  Car Judge - Show car Details
+@endsection
+
+
 @section('content')
 
 

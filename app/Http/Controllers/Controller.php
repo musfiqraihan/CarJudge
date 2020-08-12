@@ -11,15 +11,14 @@ use DB;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function setSuccessMessage($message): void
+    public function welcome()
     {
-      session()->flash('message',$message);
-      session()->flash('type','success');
-    }
-    public function setErrorMessage($message): void
-    {
-      session()->flash('message',$message);
-      session()->flash('type','danger');
+      $brands = DB::table('brands')->get();
+      $singlecar = DB::table('singlecar')
+      ->join('brands','singlecar.brands_id','brands.id')
+      ->join('boverviews','singlecar.car_model_id','boverviews.id')
+      ->select('singlecar.*','brands.name','boverviews.car_model')
+      ->get();
+      return view('welcome',compact('brands','singlecar'));
     }
 }

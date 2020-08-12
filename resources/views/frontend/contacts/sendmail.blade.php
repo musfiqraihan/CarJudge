@@ -1,6 +1,6 @@
 <?php
 $conn=mysqli_connect("localhost","root","");
-mysqli_select_db($conn,"cardatabase");
+mysqli_select_db($conn,"carjudge");
 ?>
 
 <?php
@@ -12,7 +12,7 @@ if(!empty($_POST["send"])) {
 
 	ini_set("SMTP","ssl://smtp.gmail.com");
 	ini_set("smtp_port","465");
-	$headers = 'From: carjudge.mailing.test@gmail.com' . "\r\n" .
+	$headers = 'From:' $email->userEmail . "\r\n" .
 	             'MIME-Version: 1.0' . "\r\n" .
 	             'Content-Type: text/html; charset=utf-8';
 

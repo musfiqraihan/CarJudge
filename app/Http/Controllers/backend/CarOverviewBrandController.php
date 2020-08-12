@@ -38,7 +38,7 @@ class CarOverviewBrandController extends Controller
   {
     $boverviews=DB::table('boverviews')->join('brands','boverviews.brands_id','brands.id')
               ->select('boverviews.*','brands.name')
-              ->get();
+              ->paginate(5);
           return view('backend.carsoverview.allcarsoverviews',compact('boverviews'));
   }
 

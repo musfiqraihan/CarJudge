@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Car Judge - Right Place To Find Cars</title>
+  <title>
+    @yield('title')
+  </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -58,9 +60,23 @@
       <li class="nav-item d-none d-sm-inline-block">
       <a href="{{ route('allsinglecar') }}" class="nav-link">Car Details</a>
     </li>
-      <li class="nav-item d-none d-sm-inline-block float-right">
-        <a href="{{ route('logout') }}" class="nav-link">Logout</a>
-      </li>
+    <li class="nav-item dropdown">
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            {{ Auth::user()->name }} <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </div>
+    </li>
 
     </ul>
 
@@ -172,7 +188,7 @@
 <!---single nav--->
 
           <li class="nav-item">
-            <a href="calendar.html" class="nav-link">
+            <a href="{{ url('/admin/allreviews') }}" class="nav-link">
               <i class="fas fa-eye"></i>
               <p>
                 Review
@@ -245,8 +261,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('backend')}}/dist/js/demo.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-  <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+   <!---jquery---->
+  <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
   <script>
     @if(Session::has('message'))
         var type="{{Session::get('alert-type','info')}}"

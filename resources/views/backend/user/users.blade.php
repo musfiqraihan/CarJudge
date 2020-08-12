@@ -1,5 +1,10 @@
 @extends('layouts/backend/app')
 
+@section('title')
+  Car Judge - Regiters Users Details
+@endsection
+
+
 @section('content')
 
 
@@ -13,7 +18,7 @@
                   </div>
                   <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
-                          <li class="breadcrumb-item"><a href="#">Home</a></li>
+                          <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                           <li class="breadcrumb-item active">Users</li>
 
                       </ol>
@@ -45,21 +50,23 @@
                 <th>User Name</th>
                 <th>User Email</th>
                 <th>Mobile Number</th>
+                <th>User type</th>
               </tr>
 
           @foreach ($users as $row)
               <tr>
                 <td>{{ $row->id }}</td>
-                <td>{{ $row->full_name }}</td>
+                <td>{{ $row->name }}</td>
                 <td>{{ $row->email }}</td>
-                <td>{{ $row->mobile_number }}</td>
+                <td>{{ $row->phone }}</td>
+                <td>{{ $row->usertype }}</td>
               </tr>
 
               @endforeach
 
             </table>
 
-
+{{ $users->links() }}
 
 
      </div>

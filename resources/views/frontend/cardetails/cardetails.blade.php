@@ -1,6 +1,12 @@
-@extends('layouts/frontend/app')
+@extends('layouts.frontend.header')
+
+@section('title')
+  Car Judge - {{ $singlecar->car_model }} Details
+@endsection
 
 @section('content')
+
+
   <?php
   $conn = mysqli_connect("localhost","root","","carjudge");
   $query = mysqli_query($conn,"SELECT AVG(orating) as AVGRATE from reviews where car_id = '". $singlecar->id ."'");
@@ -86,12 +92,12 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">OVERVIEW</h3>
+                        <span style="font-size:26px;">OVERVIEW</span>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-minus"></i></button>
-                        </div>
+
                     </div>
                     <div class="card-body" style="display: block;">
 
@@ -146,21 +152,19 @@
                     </div>
 
 
-
-
-
                 </div>
 
+<br>
 
 
                 <div class="card collapsed-card">
                     <div class="card-header">
-                        <h3 class="card-title">COMFORT & CONVENIENCE</h3>
+                        <span style="font-size:26px;">COMFORT & CONVENIENCE</span>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-plus"></i></button>
-                        </div>
+
                     </div>
                     <div class="card-body" style="display: none;">
 
@@ -280,16 +284,16 @@
 
                 </div>
 
-
+<br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
-                        <h3 class="card-title">SAFETY</h3>
+                        <span style="font-size:26px;">SAFETY</span>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-plus"></i></button>
-                        </div>
+
                     </div>
                     <div class="card-body" style="display: none;">
 
@@ -389,16 +393,17 @@
                     </div>
                 </div>
 
+<br>
 
 
                 <div class="card collapsed-card">
                     <div class="card-header">
-                        <h3 class="card-title">ENTERTAINMENT & COMMUNICATION</h3>
+                        <span style="font-size:26px;">ENTERTAINMENT & COMMUNICATION</span>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-plus"></i></button>
-                        </div>
+
                     </div>
                     <div class="card-body" style="display: none;">
 
@@ -459,15 +464,16 @@
 
                 </div>
 
+<br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
-                        <h3 class="card-title">INTERIOR</h3>
+                        <span style="font-size:26px;">INTERIOR</span>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-plus"></i></button>
-                        </div>
+
                     </div>
                     <div class="card-body" style="display: none;">
 
@@ -531,16 +537,16 @@
                 </div>
 
 
-
+<br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
-                        <h3 class="card-title">FUEL & PERFORMANCE</h3>
+                        <span style="font-size:26px;">FUEL & PERFORMANCE</span>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-plus"></i></button>
-                        </div>
+
                     </div>
                     <div class="card-body" style="display: none;">
 
@@ -581,16 +587,16 @@
 
                 </div>
 
-
+<br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
-                        <h3 class="card-title">ENGINE & TRANSMISSION</h3>
+                        <span style="font-size:26px;">ENGINE & TRANSMISSION</span>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-plus"></i></button>
-                        </div>
+
                     </div>
                     <div class="card-body" style="display: none;">
 
@@ -662,17 +668,17 @@
                     </div>
                 </div>
 
-
+<br>
 
 
                 <div class="card collapsed-card">
                     <div class="card-header">
-                        <h3 class="card-title">DIMENTION & CAPACITY</h3>
+                        <span style="font-size:26px;">DIMENTION & CAPACITY</span>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-plus"></i></button>
-                        </div>
+
                     </div>
                     <div class="card-body" style="display: none;">
 
@@ -741,16 +747,16 @@
 
                 </div>
 
-
+<br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
-                        <h3 class="card-title">SUSPENSION, STEERING & BRAKES</h3>
+                        <span style="font-size:26px;">SUSPENSION, STEERING & BRAKES</span>
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-plus"></i></button>
-                        </div>
+
                     </div>
                     <div class="card-body" style="display: none;">
 
@@ -809,7 +815,7 @@
 
                 </div>
 
-
+<br>
 
 
 

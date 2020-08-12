@@ -47,7 +47,7 @@ class BrandController extends Controller
  }
        public function show()
        {
-         $brands=DB::table('brands')->get();
+         $brands=DB::table('brands')->paginate(5);
          return view('backend.brands.showbrandcars',compact('brands'));
        }
        public function delete($id)
