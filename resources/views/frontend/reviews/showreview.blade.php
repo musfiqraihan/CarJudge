@@ -46,7 +46,7 @@ $query = mysqli_query($conn,"SELECT count(orating) as Total from reviews where c
  ?>
 
 
-<img src="{{ asset('images/review.jpg') }}" style="height:230px; width:100%;" alt="">
+<img src="{{ asset('images/review.jpg') }}" style="height:150px; width:100%;" alt="">
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
@@ -133,28 +133,56 @@ $query = mysqli_query($conn,"SELECT count(orating) as Total from reviews where c
     <h2 class="text-center">What they are Saying </h2>
     <div class="container mt-5">
 
-        @foreach ($reviews as $row)
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="star-rating">
-                    <span class="<?php if($row->orating >= 1){echo "fas";} ;?> fa-star o" data-overall="1" onclick="getOverall(1)"></span>
-                    <span class="<?php if($row->orating >= 2){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="2" onclick="getOverall(2)"></span>
-                    <span class="<?php if($row->orating >= 3){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="3" onclick="getOverall(3)"></span>
-                    <span class="<?php if($row->orating >= 4){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="4" onclick="getOverall(4)"></span>
-                    <span class="<?php if($row->orating >= 5){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="5" onclick="getOverall(5)"></span>
+
+
+      <div class="row">
+
+
+                @foreach ($reviews as $row)
+
+            <div class="col-lg-12 col-md-12 col-sm-12 py-3">
+
+                <div class="card mb-3" style="height:250px;box-sizing:border-box;">
+                    <div class="card-body">
+                        <div class="star-rating">
+                            <span class="<?php if($row->orating >= 1){echo "fas";} ;?> fa-star o" data-overall="1" onclick="getOverall(1)"></span>
+                            <span class="<?php if($row->orating >= 2){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="2" onclick="getOverall(2)"></span>
+                            <span class="<?php if($row->orating >= 3){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="3" onclick="getOverall(3)"></span>
+                            <span class="<?php if($row->orating >= 4){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="4" onclick="getOverall(4)"></span>
+                            <span class="<?php if($row->orating >= 5){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="5" onclick="getOverall(5)"></span>
+                        </div>
+                        <div>
+                          <h5 style="margin-bottom:0px">{{ $row->heading }}</h5><small style="font-size:12px;">Posted By <b>{{ $row->name }}</b></small>
+                        </div>
+                        <div style="margin-top:15px;height:80px;overflow:hidden;">
+                          <p style="font-size:15px;">{{ $row->message }}</p>
+                        </div>
+
+                        <div class="">
+                          <a style="text-decoration:none;font-size:13px;" href="{{ url('/carsdetails/reviews/individual/'.$row->user_id) }}">See full review</a>
+                        </div>
+
+                        <p class="card-text"><small class="text-muted">Last updated mins ago</small></p>
+
+                    </div>
                 </div>
-                <h5 style="font-weight:600;margin-bottom:0;">{{ $row->heading }}</h5><small>Posted By {{ $row->name }}</small>
-                <br><br>
-                <p class="card-text">{{ $row->message }}</p>
-                <br>
-                <a style="text-decoration:none;" href="{{ url('/carsdetails/reviews/individual/'.$row->user_id) }}">See full review</a>
-                <p class="card-text"><small class="text-muted">Last updated mins ago</small></p>
+
+
             </div>
-        </div>
+
         @endforeach
-        <div class="text-center">
-          <a href="{{ url('/carsdetails/reviews/'.$singlecar->id) }}" class="btn btn-success" style="color:white;">Post Review</a>
+{{ $reviews->links() }}
+
+
+
+      </div>
+
+      <div class="row">
+        <div class="col-4 mx-auto ">
+          <a href="{{ url('/carsdetails/reviews/'.$singlecar->id) }}" class="btn btn-info btn-block" style="color:white;">Post Review</a>
+
         </div>
+      </div>
 
 
     </div>

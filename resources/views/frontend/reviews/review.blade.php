@@ -1,11 +1,10 @@
 @extends('layouts.frontend.header')
 
 @section('title')
-  Car Judge - {{ $singlecar->car_model }} Add Review here
+Car Judge - {{ $singlecar->car_model }} For Post Review
 @endsection
 
 @section('content')
-
 
 <style media="screen">
     .star-rating {
@@ -45,9 +44,9 @@
 
                     <select class="form-control text-size" name="type">
                         <option>Choose One</option>
-                        <option>After examination drove</option>
-                        <option>I currently purchase it</option>
-                        <option>I still enjoy this car</option>
+                        <option value="exam">After examination drove</option>
+                        <option value="current">I currently purchase it</option>
+                        <option value="enjoy">I still enjoy this car</option>
                     </select>
                     <small>Reviews can be from current or previous owners and test drives</small>
                 </div>

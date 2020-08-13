@@ -31,6 +31,7 @@ class SingleCarController extends Controller
         'car_image'=>'required | mimes:png,PNG,jpg,JPG,jpeg,JPEG|max:1000',
         'fuel_type'=>'required|max:50',
         'engine'=>'required|max:50',
+        'launched'=>'required|max:50',
         'car_price'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:6|max:8',
         'body_type'=>'required|max:50',
         'transmission'=>'required|max:50',
@@ -150,6 +151,7 @@ class SingleCarController extends Controller
       $data['car_image']=$request->car_image;
       $data['fuel_type']=$request->fuel_type;
       $data['engine']=$request->engine;
+      $data['launched']=$request->launched;
       $data['car_price']=$request->car_price;
       $data['body_type']=$request->body_type;
       $data['transmission']=$request->transmission;
@@ -346,6 +348,7 @@ public function updatecar(Request $request,$id)
     'car_image'=>'mimes:png,PNG,jpg,JPG,jpeg,JPEG|max:1000',
     'fuel_type'=>'max:50',
     'engine'=>'max:50',
+    'launched'=>'max:50',
     'car_price'=>'regex:/^([0-9\s\-\+\(\)]*)$/|min:6|max:8',
     'body_type'=>'max:50',
     'transmission'=>'max:50',
@@ -466,6 +469,7 @@ public function updatecar(Request $request,$id)
   $data['car_image']=$request->car_image;
   $data['fuel_type']=$request->fuel_type;
   $data['engine']=$request->engine;
+  $data['launched']=$request->launched;
   $data['car_price']=$request->car_price;
   $data['body_type']=$request->body_type;
   $data['transmission']=$request->transmission;

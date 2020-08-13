@@ -18,7 +18,7 @@ class Controller extends BaseController
       ->join('brands','singlecar.brands_id','brands.id')
       ->join('boverviews','singlecar.car_model_id','boverviews.id')
       ->select('singlecar.*','brands.name','boverviews.car_model')
-      ->get();
+      ->paginate(6);
       return view('welcome',compact('brands','singlecar'));
     }
 }

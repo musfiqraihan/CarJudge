@@ -55,7 +55,7 @@
         <a href="{{ route('brands.show') }}" class="nav-link">Brands</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('allcaroverview') }}" class="nav-link">Overview</a>
+        <a href="{{ route('allcaroverview') }}" class="nav-link">Car Models</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
       <a href="{{ route('allsinglecar') }}" class="nav-link">Car Details</a>
@@ -134,7 +134,7 @@
   <a href="#" class="nav-link">
     <i class="fab fa-wolf-pack-battalion"></i>
     <p>
-      Overviews
+      Car Models
       <i class="right fas fa-angle-left"></i>
     </p>
   </a>

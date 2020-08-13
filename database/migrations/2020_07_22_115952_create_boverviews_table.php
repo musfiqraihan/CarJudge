@@ -17,7 +17,6 @@ class CreateBoverviewsTable extends Migration
               $table->bigIncrements('id');
               $table->integer('brands_id');
               $table->string('car_model',100)->unique();
-              $table->string('launched',100);
               $table->timestamps();
 
             });

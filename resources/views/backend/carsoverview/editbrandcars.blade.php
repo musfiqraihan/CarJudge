@@ -1,7 +1,7 @@
 @extends('layouts/backend/app')
 
 @section('title')
-  Car Judge - Edit Cars Overviews
+Car Judge - Edit Cars Overviews
 @endsection
 
 
@@ -17,12 +17,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Edit Cars Overviews</h1>
+                    <h1>Edit Cars Models</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item">Car Overviews</li>
+                        <li class="breadcrumb-item">Car Models</li>
                         <li class="breadcrumb-item active">Edit</li>
                     </ol>
                 </div>
@@ -42,7 +42,7 @@
             @csrf
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">EDIT cars overview info.</h3>
+                    <h3 class="card-title">EDIT cars models info.</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -51,7 +51,7 @@
 
                             <div class="row">
 
-                                <div class="col-md-4 my-2">
+                                <div class="col-md-6 my-2">
                                     <div class="floating-label-form-group">
                                         <label>Choose Car Brand</label>
                                         <br>
@@ -63,7 +63,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4 my-2">
+                                <div class="col-md-6 my-2">
                                     <div class="floating-label-form-group">
                                         <label>Car Model</label>
                                         <br>
@@ -71,15 +71,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 my-2">
-                                    <div class="floating-label-form-group">
-                                        <label>Launched</label>
-                                        <br>
-                                        <input type="text" class="form-control text-size" value="{{ $boverviews->launched }}" name="launched">
-                                    </div>
-                                </div>
+
 
                             </div>
+
+
+
 
 
 

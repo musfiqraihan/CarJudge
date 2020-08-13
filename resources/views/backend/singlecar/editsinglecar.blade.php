@@ -1,7 +1,7 @@
 @extends('layouts/backend/app')
 
 @section('title')
-  Car Judge - Edit car Details
+Car Judge - Edit car Details
 @endsection
 
 
@@ -39,16 +39,16 @@
     <!---start admin panel---->
     <div class="container">
 
-                                <!-- Error message -->
-                                @if ($errors->any())
-                                <div class="alert alert-danger">
-                                <ul>
-                                @foreach ($errors->all() as $error)
-                                  <li>{{ $error }}</li>
-                                @endforeach
-                                </ul>
-                                </div>
-                                @endif
+        <!-- Error message -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
 
 
@@ -74,8 +74,7 @@
                                 <select class="form-control text-size" name="brands_id">
                                     <option>Select</option>
                                     @foreach ($brands as $row)
-                                    <option value="{{ $row->id }}"<?php if($row->id == $singlecar->brands_id)  echo "selected" ?>
-                                      >{{ $row->name }}</option>
+                                    <option value="{{ $row->id }}" <?php if($row->id == $singlecar->brands_id)  echo "selected" ?>>{{ $row->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -88,9 +87,7 @@
                                 <select class="form-control text-size" name="car_model_id">
                                     <option>Select</option>
                                     @foreach ($boverviews as $row)
-                                    <option value="{{ $row->id }}"
-                                      <?php if($row->id == $singlecar->car_model_id)  echo "selected" ?>
-                                      >{{ $row->car_model }}</option>
+                                    <option value="{{ $row->id }}" <?php if($row->id == $singlecar->car_model_id)  echo "selected" ?>>{{ $row->car_model }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -102,9 +99,7 @@
                             <div class="floating-label-form-group">
                                 <label>Fuel Type</label>
                                 <br>
-                                <input type="text"
-                          value="{{ $singlecar->fuel_type }}"
-                               class="form-control text-size" name="fuel_type">
+                                <input type="text" value="{{ $singlecar->fuel_type }}" class="form-control text-size" name="fuel_type">
                             </div>
                         </div>
 
@@ -1163,18 +1158,33 @@
                             </div>
 
                         </div>
+
+                        <div class="col-md-3 my-2">
+                            <div class="floating-label-form-group">
+                                <label>Launched</label>
+                                <br>
+                                <select class="form-control text-size" id="launched" name="launched">
+                                    <option disabled="" selected="">Select</option>
+                                    <option value="{{ $singlecar->id }}" <?php if($singlecar->id == $singlecar->launched)  echo "selected" ?> >
+
+
+                                </select>
+                            </div>
+                        </div>
+
+
                     </div>
 
 
 
 
 
-                            <div class="row">
-                                <div class="col-md-12" style="margin-left:400px;">
-                                    <button type="submit" class="btn btn-success btn-lg mr-3">UPDATE</button>
-                                    <a href="{{ route('allsinglecar') }}" class="btn btn-danger btn-lg">CANCEL</a>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-left:400px;">
+                            <button type="submit" class="btn btn-success btn-lg mr-3">UPDATE</button>
+                            <a href="{{ route('allsinglecar') }}" class="btn btn-danger btn-lg">CANCEL</a>
+                        </div>
+                    </div>
 
 
 

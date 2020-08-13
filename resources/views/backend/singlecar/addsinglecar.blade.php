@@ -58,7 +58,7 @@
                     <a href="{{ route('brands.show') }}" class="nav-link">Brands</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('allcaroverview') }}" class="nav-link">Overview</a>
+                    <a href="{{ route('allcaroverview') }}" class="nav-link">Car Models</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ route('allsinglecar') }}" class="nav-link">Car Details</a>
@@ -133,7 +133,7 @@
                         <a href="#" class="nav-link">
                             <i class="fab fa-wolf-pack-battalion"></i>
                             <p>
-                                Overviews
+                                Car Models
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -1416,6 +1416,20 @@
                                     <label for="exampleInputFile"> Add car Image </label>
                                     <input type="file" class="form-control text-size" name="car_image">
 
+                                </div>
+                            </div>
+                            <div class="col-md-3 my-2">
+                                <div class="floating-label-form-group">
+                                    <label>Launched</label>
+                                    <br>
+                                    <select class="form-control text-size" id="launched" name="launched">
+                                        <option disabled="" selected="">Select</option>
+
+                                        <option value="popular">Popular Car</option>
+                                        <option value="recently">Recently launched</option>
+                                        <option value="upcoming">Upcoming Car</option>
+
+                                    </select>
                                 </div>
                             </div>
 

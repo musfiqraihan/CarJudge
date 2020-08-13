@@ -17,13 +17,12 @@ class CarOverviewBrandController extends Controller
   public function storecar(Request $request)
   {
     $validatedData = $request->validate([
-      'car_model'=>'required|unique:boverviews,car_model|max:100',
-      'launched'=>'required | max:100'
+      'car_model'=>'required|unique:boverviews,car_model|max:100'
     ]);
     $data=array();
     $data['brands_id']=$request->brands_id;
     $data['car_model']=$request->car_model;
-    $data['launched']=$request->launched;
+
 
         DB::table('boverviews')->insert($data);
         $notification=array(
@@ -69,14 +68,14 @@ class CarOverviewBrandController extends Controller
 
   public function updatecar(Request $request,$id){
     $validatedData = $request->validate([
-      'car_model'=>'unique:boverviews,car_model|max:100',
-      'launched'=>'max:100'
+      'car_model'=>'unique:boverviews,car_model|max:100'
     ]);
 
     $data=array();
     $data['brands_id']=$request->brands_id;
     $data['car_model']=$request->car_model;
-    $data['launched']=$request->launched;
+
+
     DB::table('boverviews')->where('id',$id)->update($data);
        $notification=array(
            'message'=>'Data updated Successfully',

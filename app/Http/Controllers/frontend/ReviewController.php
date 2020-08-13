@@ -10,7 +10,13 @@ class ReviewController extends Controller
 {
   public function reviews()
   {
-    return view('frontend.reviews.review');
+    $boverviews=DB::table('boverviews')->get();
+    $singlecar=DB::table('singlecar')->get();
+    $reviews = DB::table('reviews')
+    ->join('singlecar','singlecar.id','reviews.car_id')
+    ->select('reviews.*','singlecar.id')
+    ->paginate(8);
+   return view('frontend.reviews.allreview',compact('reviews','singlecar','boverviews'));
   }
 
 
@@ -86,7 +92,7 @@ class ReviewController extends Controller
     ->join('singlecar','singlecar.id','reviews.car_id')
     ->select('reviews.*','singlecar.id')
     ->where('reviews.car_id',$id)
-    ->get();
+    ->paginate(5);
     return view('frontend.reviews.showreview',compact('reviews','singlecar'));
   }
 

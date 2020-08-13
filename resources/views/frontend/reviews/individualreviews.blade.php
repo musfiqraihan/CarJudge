@@ -17,7 +17,7 @@
       }
   </style>
 
-<img src="{{ asset('images/review.jpg') }}" style="height:230px; width:100%;" alt="">
+<img src="{{ asset('images/review.jpg') }}" style="height:150px; width:100%;" alt="">
 <div class="container my-5">
     <div class="row">
         <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">

@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/service.css') }}" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/compare.css') }}" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/contact.css') }}" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/review.css') }}" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/footer.css') }}" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}" media="all" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
@@ -57,8 +58,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
 
-                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                            <a class="nav-link" style="color:black;" href="{{ url('/') }}">Home<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item {{ Request::is('brands') ? 'active' : '' }}">
                             <a class="nav-link" style="color:black;" href="{{ route('brand_page') }}">Brands</a>

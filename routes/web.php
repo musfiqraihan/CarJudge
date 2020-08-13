@@ -60,7 +60,7 @@ Route::post('/contacts', 'frontend\ContactController@collect');
 
 
 //review page==============
-Route::get('/reviews', 'frontend\ReviewController@reviews')->name('review_page');
+Route::get('/all/reviews', 'frontend\ReviewController@reviews')->name('review_page');
 Route::get('/carsdetails/reviews/{id}', 'frontend\ReviewController@postreviews');
 Route::post('/carsdetails/process-reviews', 'frontend\ReviewController@process');
 Route::get('/carsdetails/reviews/show/{id}', 'frontend\ReviewController@showreviews');
