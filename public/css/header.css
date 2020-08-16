@@ -5,9 +5,6 @@
     margin-bottom: 0px!important;
 }
 
-.nav-item a:hover, .active{
-  border-bottom: 1px solid black;
-}
 
 
 .navbar-header button.navbar-toggle, .navbar-header .icon-bar{

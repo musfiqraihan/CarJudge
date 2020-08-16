@@ -25,9 +25,10 @@
             <h2>Review placed for {{ $singlecar->car_model }}</h2>
             <br>
             <h4 style="font-weight:600;margin-bottom:0;">{{ $reviews->heading }}</h4><small>posted By {{ $reviews->name }} from {{ $reviews->city }}</small>
-            <br><br><br>
-            <p>{{ $reviews->message }}</p>
-            <p><small class="text-muted">Last updated mins ago</small></p>
+            <div style="margin-top:20px;height:250px;overflow:hidden;">
+              <p style="font-size:15px;">{{ $reviews->message }}</p>
+            </div>
+            <small class="text-muted">{{ date('M j, Y h:ia', strtotime($reviews->created_at)) }}</small>
 
         </div>
 

@@ -1418,20 +1418,6 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-3 my-2">
-                                <div class="floating-label-form-group">
-                                    <label>Launched</label>
-                                    <br>
-                                    <select class="form-control text-size" id="launched" name="launched">
-                                        <option disabled="" selected="">Select</option>
-
-                                        <option value="popular">Popular Car</option>
-                                        <option value="recently">Recently launched</option>
-                                        <option value="upcoming">Upcoming Car</option>
-
-                                    </select>
-                                </div>
-                            </div>
 
                         </div>
 

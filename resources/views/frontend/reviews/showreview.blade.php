@@ -162,7 +162,7 @@ $query = mysqli_query($conn,"SELECT count(orating) as Total from reviews where c
                           <a style="text-decoration:none;font-size:13px;" href="{{ url('/carsdetails/reviews/individual/'.$row->user_id) }}">See full review</a>
                         </div>
 
-                        <p class="card-text"><small class="text-muted">Last updated mins ago</small></p>
+                        <small class="text-muted">{{ date('M j, Y h:ia', strtotime($row->created_at)) }}</small>
 
                     </div>
                 </div>

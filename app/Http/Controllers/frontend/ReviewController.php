@@ -10,13 +10,16 @@ class ReviewController extends Controller
 {
   public function reviews()
   {
-    $boverviews=DB::table('boverviews')->get();
-    $singlecar=DB::table('singlecar')->get();
+    $singlecar = DB::table('singlecar')
+    ->join('brands','singlecar.brands_id','brands.id')
+    ->join('boverviews','singlecar.car_model_id','boverviews.id')
+    ->select('singlecar.*','brands.name','boverviews.car_model')
+    ->paginate(8);
     $reviews = DB::table('reviews')
     ->join('singlecar','singlecar.id','reviews.car_id')
     ->select('reviews.*','singlecar.id')
     ->paginate(8);
-   return view('frontend.reviews.allreview',compact('reviews','singlecar','boverviews'));
+   return view('frontend.reviews.allreview',compact('reviews','singlecar'));
   }
 
 
@@ -112,5 +115,15 @@ class ReviewController extends Controller
     return view('frontend.reviews.individualreviews',compact('reviews','singlecar'));
   }
 
+
+  public function searchcar(Request $request)
+  {
+    $search = $request->get('search');
+    $singlecar = DB::table('singlecar')
+    ->join('brands','singlecar.brands_id','brands.id')
+    ->join('boverviews','singlecar.car_model_id','boverviews.id')
+    ->where('boverviews.car_model','like','%'.$search.'%')->paginate(6);
+    return view('frontend.reviews.allreview',compact('singlecar'));
+  }
 
 }

@@ -18,7 +18,6 @@ class CreateSinglecarTable extends Migration
             $table->integer('brands_id');
             $table->integer('car_model_id');
             $table->string('car_image')->nullable;
-            $table->string('launched',100);
             $table->string('fuel_type',100);
             $table->string('engine',100);
             $table->integer('car_price');

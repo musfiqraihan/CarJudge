@@ -22,6 +22,7 @@ Auth::routes();
 
 //websites routes
 
+
 Route::get('/brands/cardetails/{id}', 'CarDetailsController@details');
 Route::post('/home/subscribe', 'SubscribeController@subscribe');
 
@@ -65,8 +66,7 @@ Route::get('/carsdetails/reviews/{id}', 'frontend\ReviewController@postreviews')
 Route::post('/carsdetails/process-reviews', 'frontend\ReviewController@process');
 Route::get('/carsdetails/reviews/show/{id}', 'frontend\ReviewController@showreviews');
 Route::get('/carsdetails/reviews/individual/{id}', 'frontend\ReviewController@individualreviews');
-
-
+Route::get('/all/reviews/search', 'frontend\ReviewController@searchcar');
 
 
 
@@ -77,8 +77,25 @@ Route::get('/carsdetails/reviews/individual/{id}', 'frontend\ReviewController@in
 //user panel
 Route::group(['middleware' => ['auth','user']], function (){
   Route::get('/home', 'HomeController@index')->name('home');
-
+  Route::get('/home/profile/{id}', 'HomeController@profile')->name('user.profile');
+  Route::get('/home/profile/edit/{id}', 'HomeController@EditProfile')->name('edit.profile');
+  Route::post('/home/profile/update/', 'HomeController@updateProfile')->name('update.profile');
+  Route::get('/home/profile/password/edit/{id}', 'HomeController@passchange')->name('change.password');
+  Route::post('/home/profile/password/update/', 'HomeController@updatepass')->name('update.pass');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

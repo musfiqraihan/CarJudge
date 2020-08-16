@@ -8,6 +8,7 @@ use DB;
 
 class UserController extends Controller
 {
+
   public function userRegistration()
   {
     return view('frontend.users.userregister');
@@ -62,10 +63,7 @@ class UserController extends Controller
       return redirect()->back();
     }
   }
-  public function showProfile()
-  {
-    return view('frontend.users.dashboard');
-  }
+
 
   public function logout()
   {

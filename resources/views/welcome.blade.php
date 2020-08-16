@@ -1,5 +1,6 @@
 @extends('layouts.frontend.header')
 
+
 @section('title')
 Car Judge - Right Place To Find Cars
 @endsection
@@ -12,87 +13,172 @@ Car Judge - Right Place To Find Cars
 <!--header image-->
 <div class="container-fluid coverpage">
     <div class="row height-max align-items-center">
-        <!---start search--->
-        <div class="container-fluid">
-            <div class="modal-dialog modal-lg" style="opacity:0.9;">
-                <div class="modal-content bg-light">
 
-                    <div class="modal-body">
+      <!---start search--->
+      <div class="container-fluid">
+          <div class="modal-dialog modal-lg" style="opacity:0.9;">
+              <div class="modal-content bg-light">
 
-
-                        <div class="row">
-                            @csrf
-                            <div class="col-md-4">
-                                <div class="floating-label-form-group">
-                                    <label style="color:black;">Choose Brand</label>
-                                    <br>
-                                    <select class="form-control text-size" id="brands_id" name="brands_id">
-                                        <option selected="" disabled="">Select</option>
-                                        @foreach ($brands as $row)
-                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="floating-label-form-group">
-                                    <label style="color:black;">Choose Car Model</label>
-                                    <br>
-                                    <select class="form-control text-size dynamic" id="car_model_id" name="car_model_id">
-                                        <option selected="" disabled="">Select</option>
-
-                                        <option value=""></option>
-
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="floating-label-form-group">
-                                    <label style="color:black;">Choose Year</label>
-                                    <br>
-                                    <select class="form-control text-size dynamic" id="year" name="year">
-                                        <option selected="" disabled="">Select</option>
-
-                                        <option value=""></option>
-
-                                    </select>
-                                </div>
-                            </div>
+                  <div class="modal-body">
 
 
-                        </div>
+                      <div class="row">
+                          @csrf
+                          <div class="col-md-4">
+                              <div class="floating-label-form-group">
+                                  <label style="color:black;">Choose Brand</label>
+                                  <br>
+                                  <select class="form-control text-size" id="brands_id" name="brands_id">
+                                      <option selected="" disabled="">Select</option>
+                                      @foreach ($brands as $row)
+                                      <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                      @endforeach
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="floating-label-form-group">
+                                  <label style="color:black;">Choose Car Model</label>
+                                  <br>
+                                  <select class="form-control text-size dynamic" id="car_model_id" name="car_model_id">
+                                      <option selected="" disabled="">Select</option>
+
+                                      <option value=""></option>
+
+                                  </select>
+                              </div>
+                          </div>
+
+                          <div class="col-md-4">
+                              <div class="floating-label-form-group">
+                                  <label style="color:black;">Choose Year</label>
+                                  <br>
+                                  <select class="form-control text-size dynamic" id="year" name="year">
+                                      <option selected="" disabled="">Select</option>
+
+                                      <option value=""></option>
+
+                                  </select>
+                              </div>
+                          </div>
 
 
-
-                        <div class="row">
-
-                            <div class="col-md-9" style="margin-top:15px;">
-                                <button type="submit" name="search" id="search" class="btn btn-success btn-block" style="font-size:16px;">Search</button>
-                            </div>
-                            <div class="col-md-3" style="margin-top:10px;">
-
-                                <small style="color:black;">Not found yet then go for</small>
-                                <span class="adv-search"><a href="#">Advance Search?</a></span>
-
-                            </div>
-
-                        </div>
+                      </div>
 
 
 
-                    </div>
-                </div>
-                <!---end search-->
+                      <div class="row">
 
-                <h2 class="text-capitalize text-center display-3">Find Your Next Car</h2>
-                <h2 class="text capitalize text-center">Right place to find Cars</h2>
+                          <div class="col-md-9" style="margin-top:15px;">
+                              <button type="submit" name="search" id="search" class="btn btn-success btn-block" style="font-size:16px;">Search</button>
+                          </div>
+                          <div class="col-md-3" style="margin-top:10px;">
 
-            </div>
+                              <small style="color:black;">Not found yet then go for</small>
+                              <span class="adv-search"><a href="#">Advance Search?</a></span>
+
+                          </div>
+
+                      </div>
 
 
 
-        </div>
+                  </div>
+              </div>
+              <!---end search-->
+
+              <h2 class="text-capitalize text-center display-3">Find Your Next Car</h2>
+              <h2 class="text capitalize text-center">Right place to find Cars</h2>
+
+          </div>
+
+
+
+      </div>
+
+
+
+      <script type="text/javascript">
+          jQuery(document).ready(function() {
+
+              jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
+              jQuery('select[name="year"]').attr('disabled', 'disabled');
+
+              jQuery('select[name="brands_id"]').on('change', function() {
+                  var brandID = jQuery(this).val();
+                  if (brandID) {
+                      jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
+                      jQuery('select[name="year"]').attr('disabled', 'disabled');
+
+                      jQuery.ajax({
+                          url: '/getmodels/' + brandID,
+                          type: "GET",
+                          dataType: "json",
+                          success: function(data) {
+                              jQuery('select[name="car_model_id"]').empty();
+                              jQuery('select[name="year"]').empty();
+                              $('select[name="car_model_id"]').append('<option selected="" disabled="">Select</option>');
+                              $('select[name="year"]').append('<option selected="" disabled="">Select</option>');
+                              jQuery.each(data, function(key, value) {
+                                  $('select[name="car_model_id"]').append('<option value="' + key + '">' + value + '</option>');
+                              });
+                              jQuery('select[name="car_model_id"]').removeAttr('disabled');
+                          }
+                      });
+
+                  } else {
+                      $('select[name="car_model_id"]').empty();
+                      $('select[name="year"]').empty();
+                  }
+              });
+
+
+          });
+
+          jQuery(document).ready(function() {
+
+
+              jQuery('select[name="car_model_id"]').on('change', function() {
+                  var modelID = jQuery(this).val();
+                  if (modelID) {
+                      jQuery('select[name="year"]').attr('disabled', 'disabled');
+
+                      jQuery.ajax({
+                          url: '/getyears/' + modelID,
+                          type: "GET",
+                          dataType: "json",
+                          success: function(data) {
+                              jQuery('select[name="year"]').empty();
+                              $('select[name="year"]').append('<option selected="" disabled="">Select</option>');
+                              jQuery.each(data, function(key, value) {
+                                  $('select[name="year"]').append('<option value="' + key + '">' + value + '</option>');
+                              });
+                              jQuery('select[name="year"]').removeAttr('disabled');
+                          }
+                      });
+
+                  } else {
+                      $('select[name="car_model_id"]').empty();
+                      $('select[name="year"]').empty();
+                  }
+              });
+
+
+
+          });
+      </script>
+
+
+      <script type="text/javascript">
+          $("#search").on("click", function() {
+              var link = document.getElementById("year").value;
+
+              $.ajax({
+                  url: window.location.href = "/getData/" + link
+              });
+          });
+      </script>
+
 
 
     </div>
@@ -100,88 +186,6 @@ Car Judge - Right Place To Find Cars
 
 
 </div>
-
-
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-
-        jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
-        jQuery('select[name="year"]').attr('disabled', 'disabled');
-
-        jQuery('select[name="brands_id"]').on('change', function() {
-            var brandID = jQuery(this).val();
-            if (brandID) {
-                jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
-                jQuery('select[name="year"]').attr('disabled', 'disabled');
-
-                jQuery.ajax({
-                    url: '/getmodels/' + brandID,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        jQuery('select[name="car_model_id"]').empty();
-                        jQuery('select[name="year"]').empty();
-                        $('select[name="car_model_id"]').append('<option selected="" disabled="">Select</option>');
-                        $('select[name="year"]').append('<option selected="" disabled="">Select</option>');
-                        jQuery.each(data, function(key, value) {
-                            $('select[name="car_model_id"]').append('<option value="' + key + '">' + value + '</option>');
-                        });
-                        jQuery('select[name="car_model_id"]').removeAttr('disabled');
-                    }
-                });
-
-            } else {
-                $('select[name="car_model_id"]').empty();
-                $('select[name="year"]').empty();
-            }
-        });
-
-
-    });
-
-    jQuery(document).ready(function() {
-
-
-        jQuery('select[name="car_model_id"]').on('change', function() {
-            var modelID = jQuery(this).val();
-            if (modelID) {
-                jQuery('select[name="year"]').attr('disabled', 'disabled');
-
-                jQuery.ajax({
-                    url: '/getyears/' + modelID,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        jQuery('select[name="year"]').empty();
-                        $('select[name="year"]').append('<option selected="" disabled="">Select</option>');
-                        jQuery.each(data, function(key, value) {
-                            $('select[name="year"]').append('<option value="' + key + '">' + value + '</option>');
-                        });
-                        jQuery('select[name="year"]').removeAttr('disabled');
-                    }
-                });
-
-            } else {
-                $('select[name="car_model_id"]').empty();
-                $('select[name="year"]').empty();
-            }
-        });
-
-
-
-    });
-</script>
-
-
-<script type="text/javascript">
-    $("#search").on("click", function() {
-        var link = document.getElementById("year").value;
-
-        $.ajax({
-            url: window.location.href = "/getData/" + link
-        });
-    });
-</script>
 
 
 
@@ -310,13 +314,235 @@ Car Judge - Right Place To Find Cars
             </div>
         </div>
         <!---end section title--->
-        <div class="row mb-5">
-            <div class="col-10 mx-auto col-md-12 d-flex justify-content-center">
-                <button class="btn btn-outline-secondary text-uppercase mx-2 btn-sm filter-btn" onclick="getFilter('popular')" data-filter="popular" type="button" name="button">Popular cars</button>
-                <button class="btn btn-outline-secondary text-uppercase mx-2 btn-sm filter-btn" onclick="getFilter('recently')" data-filter="recently" type="button" name="button">Recently launched</button>
-                <button class="btn btn-outline-secondary text-uppercase mx-2 btn-sm filter-btn" onclick="getFilter('upcoming')" data-filter="upcoming" type="button" name="button">upcoming cars</button>
+
+        <ul class="nav justify-content-center nav-pills">
+          <li class="nav-item">
+            <a href="#popular" class="btn btn-outline-secondary btn-sm mx-3 text-uppercase active a" data-toggle="tab">Popular Cars</a>
+          </li>
+          <li class="nav-item">
+              <a href="#recently" class="btn btn-outline-secondary btn-sm mx-3 text-uppercase a" data-toggle="tab">Recently Launched</a>
+          </li>
+          <li class="nav-item">
+            <a href="#upcoming" class="btn btn-outline-secondary btn-sm mx-3 text-uppercase a" data-toggle="tab">Upcoming Cars</a>
+          </li>
+        </ul>
+
+<br><br>
+
+<style media="screen">
+.nav-item .a:hover, .active {
+  border-bottom: 0;
+}
+</style>
+
+    <div class="tab-content">
+      <div class="tab-pane show fade active" id="popular">
+
+                <?php
+                $popular = DB::table('reviews')
+                  ->leftJoin('singlecar','reviews.car_id','singlecar.id')
+                  ->leftJoin('brands','singlecar.brands_id','brands.id')
+                  ->leftJoin('boverviews','singlecar.car_model_id','boverviews.id')
+                  ->select('car_id','singlecar.id','car_image','brands.name','car_model','car_price','body_type','transmission','fuel_type','year','engine','seat',DB::raw('avg(orating) as average'))
+                  ->groupBy('car_id','singlecar.id','car_image','brands.name','car_model','car_price','body_type','transmission','fuel_type','year','engine','seat')
+                  ->orderBy('average', 'DESC')
+                  ->paginate(6);
+               ?>
+               {{-- for popular cars --}}
+               <div class="row">
+
+                   @foreach ($popular as $row)
+
+                   <!--single car--->
+                   <div class="col-10 mx-auto my-3 col-md-6 col-lg-4">
+                       <div class="card car-card">
+                           <img src="{{ URL::to($row->car_image) }}" style="height:200px;" class="card-img-top car-img" alt="">
+                           <!--card body-->
+                           <div class="card-body">
+                               <div class="car-info d-flex justify-content-between">
+                                   <!---first flex child--->
+                                   <div class="car-text text-uppercase">
+                                       <h6 class="font-weight-bold">{{ $row->name }}</h6>
+                                       <a href="{{ url('/brands/cardetails/'.$row->id) }}" style="text-decoration:none;">{{ $row->car_model }}</a>
+                                   </div>
+                                   <!---second flex child---->
+                                   <h5 class="car-value align-self-centr py-2 px-3">
+                                       <span class="car-price">৳{{ $row->car_price }}</span>
+                                   </h5>
+                               </div>
+                           </div>
+                           <!---end of card--->
+                           <div class="card-footer text-capitalize justify-content-between">
+                               <table class="table">
+                                   <tr>
+                                       <td><span><i class="fas fa-car"></i></span><br>{{ $row->body_type }}</td>
+                                       <td><span><i class="fas fa-cogs"></i></span><br>{{ $row->transmission }}</td>
+                                       <td><span><i class="fas fa-gas-pump"></i></span><br>{{ $row->fuel_type }}</td>
+                                   </tr>
+                                   <tr>
+                                       <td><span><i class="fas fa-check"></i>&nbsp;</span>{{ $row->year }}</td>
+                                       <td><span><i class="fas fa-tachometer-alt"></i>&nbsp;</span>{{ $row->engine }}</td>
+                                       <td><img src="{{ asset('images/car-seat.jpg')}}" alt="car-seat"> <span>&nbsp;</span> {{ $row->seat }}</td>
+                                   </tr>
+                               </table>
+                           </div>
+
+                       </div>
+                   </div>
+                   <!--end single car--->
+
+
+                   @endforeach
+
+
+
+               </div>
+      {{ $popular->links() }}
+
+      </div>
+
+
+
+
+        <div class="tab-pane fade" id="recently">
+
+                  <?php
+                  $y = date("Y");
+                  $recently = DB::table('singlecar')
+                  ->join('brands','singlecar.brands_id','brands.id')
+                  ->join('boverviews','singlecar.car_model_id','boverviews.id')
+                  ->where('singlecar.year', '=', $y)
+                  ->select('singlecar.*','brands.name','boverviews.car_model')
+                  ->paginate(6);
+                 ?>
+                 {{-- for recently cars --}}
+                 <div class="row">
+
+                     @foreach ($recently as $row)
+
+                     <!--single car--->
+                     <div class="col-10 mx-auto my-3 col-md-6 col-lg-4">
+                         <div class="card car-card">
+
+                             <img src="{{ URL::to($row->car_image) }}" style="height:200px;" class="card-img-top car-img" alt="">
+                             <!--card body-->
+                             <div class="card-body">
+                                 <div class="car-info d-flex justify-content-between">
+                                     <!---first flex child--->
+                                     <div class="car-text text-uppercase">
+                                         <h6 class="font-weight-bold">{{ $row->name }}</h6>
+                                         <a href="{{ url('/brands/cardetails/'.$row->id) }}" style="text-decoration:none;">{{ $row->car_model }}</a>
+                                     </div>
+                                     <!---second flex child---->
+                                     <h5 class="car-value align-self-centr py-2 px-3">
+                                         <span class="car-price">৳{{ $row->car_price }}</span>
+                                     </h5>
+                                 </div>
+                             </div>
+                             <!---end of card--->
+                             <div class="card-footer text-capitalize justify-content-between">
+                                 <table class="table">
+                                     <tr>
+                                         <td><span><i class="fas fa-car"></i></span><br>{{ $row->body_type }}</td>
+                                         <td><span><i class="fas fa-cogs"></i></span><br>{{ $row->transmission }}</td>
+                                         <td><span><i class="fas fa-gas-pump"></i></span><br>{{ $row->fuel_type }}</td>
+                                     </tr>
+                                     <tr>
+                                         <td><span><i class="fas fa-check"></i>&nbsp;</span>{{ $row->year }}</td>
+                                         <td><span><i class="fas fa-tachometer-alt"></i>&nbsp;</span>{{ $row->engine }}</td>
+                                         <td><img src="{{ asset('images/car-seat.jpg')}}" alt="car-seat"> <span>&nbsp;</span> {{ $row->seat }}</td>
+                                     </tr>
+                                 </table>
+                             </div>
+
+                         </div>
+                     </div>
+                     <!--end single car--->
+
+
+                     @endforeach
+
+
+
+                 </div>
+        {{ $recently->links() }}
+
+        </div>
+
+
+
+
+
+
+            <div class="tab-pane fade" id="upcoming">
+              <?php
+              $y = date("Y");
+              $upcoming = DB::table('singlecar')
+              ->join('brands','singlecar.brands_id','brands.id')
+              ->join('boverviews','singlecar.car_model_id','boverviews.id')
+              ->where('singlecar.year', '>', $y)
+              ->select('singlecar.*','brands.name','boverviews.car_model')
+              ->paginate(6);
+             ?>
+             {{-- for upcoming cars --}}
+             <div class="row">
+
+                 @foreach ($upcoming as $row)
+
+                 <!--single car--->
+                 <div class="col-10 mx-auto my-3 col-md-6 col-lg-4">
+                     <div class="card car-card">
+
+                         <img src="{{ URL::to($row->car_image) }}" style="height:200px;" class="card-img-top car-img" alt="">
+                         <!--card body-->
+                         <div class="card-body">
+                             <div class="car-info d-flex justify-content-between">
+                                 <!---first flex child--->
+                                 <div class="car-text text-uppercase">
+                                     <h6 class="font-weight-bold">{{ $row->name }}</h6>
+                                     <a href="{{ url('/brands/cardetails/'.$row->id) }}" style="text-decoration:none;">{{ $row->car_model }}</a>
+                                 </div>
+                                 <!---second flex child---->
+                                 <h5 class="car-value align-self-centr py-2 px-3">
+                                     <span class="car-price">৳{{ $row->car_price }}</span>
+                                 </h5>
+                             </div>
+                         </div>
+                         <!---end of card--->
+                         <div class="card-footer text-capitalize justify-content-between">
+                             <table class="table">
+                                 <tr>
+                                     <td><span><i class="fas fa-car"></i></span><br>{{ $row->body_type }}</td>
+                                     <td><span><i class="fas fa-cogs"></i></span><br>{{ $row->transmission }}</td>
+                                     <td><span><i class="fas fa-gas-pump"></i></span><br>{{ $row->fuel_type }}</td>
+                                 </tr>
+                                 <tr>
+                                     <td><span><i class="fas fa-check"></i>&nbsp;</span>{{ $row->year }}</td>
+                                     <td><span><i class="fas fa-tachometer-alt"></i>&nbsp;</span>{{ $row->engine }}</td>
+                                     <td><img src="{{ asset('images/car-seat.jpg')}}" alt="car-seat"> <span>&nbsp;</span> {{ $row->seat }}</td>
+                                 </tr>
+                             </table>
+                         </div>
+
+                     </div>
+                 </div>
+                 <!--end single car--->
+
+
+                 @endforeach
+
+
+
+             </div>
+    {{ $upcoming->links() }}
+
             </div>
         </div>
+
+
+<br><br>
+
+
         <!---cars---->
 
 
@@ -324,56 +550,9 @@ Car Judge - Right Place To Find Cars
 
 
 
-        <div class="row">
-
-            @foreach ($singlecar as $row)
-
-            <!--single car--->
-            <div class="col-10 mx-auto my-3 col-md-6 col-lg-4 single-car {{ $row->launched }}">
-                <div class="card car-card">
-                    <img src="{{ URL::to($row->car_image) }}" style="height:200px;" class="card-img-top car-img" alt="">
-                    <!--card body-->
-                    <div class="card-body">
-                        <div class="car-info d-flex justify-content-between">
-                            <!---first flex child--->
-                            <div class="car-text text-uppercase">
-                                <h6 class="font-weight-bold">{{ $row->name }}</h6>
-                                <a href="{{ url('/brands/cardetails/'.$row->id) }}" style="text-decoration:none;">{{ $row->car_model }}</a>
-                            </div>
-                            <!---second flex child---->
-                            <h5 class="car-value align-self-centr py-2 px-3">
-                                <span class="car-price">৳{{ $row->car_price }}</span>
-                            </h5>
-                        </div>
-                    </div>
-                    <!---end of card--->
-                    <div class="card-footer text-capitalize justify-content-between">
-                        <table class="table">
-                            <tr>
-                                <td><span><i class="fas fa-car"></i></span><br>{{ $row->body_type }}</td>
-                                <td><span><i class="fas fa-cogs"></i></span><br>{{ $row->transmission }}</td>
-                                <td><span><i class="fas fa-gas-pump"></i></span><br>{{ $row->fuel_type }}</td>
-                            </tr>
-                            <tr>
-                                <td><span><i class="fas fa-check"></i>&nbsp;</span>{{ $row->year }}</td>
-                                <td><span><i class="fas fa-tachometer-alt"></i>&nbsp;</span>{{ $row->engine }}</td>
-                                <td><img src="{{ asset('images/car-seat.jpg')}}" alt="car-seat"> <span>&nbsp;</span> {{ $row->seat }}</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-            <!--end single car--->
-
-            @endforeach
 
 
 
-        </div>
-        <div class="float-right">
-            {{ $singlecar->links() }}
-        </div>
         <br>
 
     </div>
@@ -381,40 +560,6 @@ Car Judge - Right Place To Find Cars
 
 <!--- featured part end-->
 
-
-<script type="text/javascript">
-    function getFilter(filter) {
-        $(".filter-btn").click(function() {
-
-            var launc = $(this).data('filter');
-            // console.log(launched);
-            var singlecar = document.querySelectorAll('.single-car')
-            // console.log(singlecar);
-            singlecar.forEach(car => {
-
-                if (car.classList.contains(launc)) {
-                    car.style.display = "block";
-                } else {
-                    car.style.display = "none";
-                }
-
-            })
-
-
-
-
-
-
-
-
-            // if (orating <= overall) {
-            //     $(this).removeClass('far').addClass('fas');
-            // } else {
-            //     $(this).removeClass('fas').addClass('far');
-            // }
-        });
-    }
-</script>
 
 
 

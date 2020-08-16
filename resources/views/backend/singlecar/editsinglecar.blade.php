@@ -1159,18 +1159,7 @@ Car Judge - Edit car Details
 
                         </div>
 
-                        <div class="col-md-3 my-2">
-                            <div class="floating-label-form-group">
-                                <label>Launched</label>
-                                <br>
-                                <select class="form-control text-size" id="launched" name="launched">
-                                    <option disabled="" selected="">Select</option>
-                                    <option value="{{ $singlecar->id }}" <?php if($singlecar->id == $singlecar->launched)  echo "selected" ?> >
-
-
-                                </select>
-                            </div>
-                        </div>
+                    
 
 
                     </div>

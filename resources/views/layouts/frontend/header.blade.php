@@ -22,14 +22,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/select2.min.css') }}" media="all" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" media="screen">
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+    <!---font---->
+    <script src="{{ asset('js/all.js') }}"></script>
 
+    @stack('css')
+
+
+
+
+    <style media="screen">
+    .nav-item a:hover, .active{
+      border-bottom: 1px solid black;
+    }
+    </style>
 
 
 
@@ -43,7 +57,7 @@
 
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd;opacity:0.9;">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd;opacity:0.9;">
             <div class="container">
 
 
@@ -91,9 +105,16 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+
+                                <a class="dropdown-item" style="color:black;" href="{{ route('user.profile', Auth::user()->id ) }}"><i class="fas fa-user"></i>&nbsp;&nbsp;My Profile</a>
+
+                                <a class="dropdown-item" style="color:black;" href="" onclick=""><i class="fas fa-heart"></i>&nbsp;&nbsp;Saved Cars</a>
+
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" style="color:black;" href="{{ route('logout') }}" onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;{{ __('Logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -234,33 +255,33 @@
     <!----bootstrap js---->
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
-
+    <script src="{{ asset('js/select2.full.min') }}"></script>
 
     <script src="{{asset('backend')}}/dist/js/adminlte.js"></script>
 
-    <script src="{{ asset('js/select2.full.min') }}"></script>
+
 
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
-    @if(Session::has('message'))
-        var type="{{Session::get('alert-type','info')}}"
-        switch(type) {
-          case 'info':
-                toastr.info("{{ Session::get('message') }}");
-                break;
-          case 'success':
-               toastr.success("{{ Session::get('message') }}");
-               break;
-          case 'warning':
-               toastr.warning("{{ Session::get('message') }}");
-               break;
-          case 'error':
-              toastr.error("{{ Session::get('message') }}");
-               break;
-        }
-        @endif
+      @if(Session::has('message'))
+          var type="{{Session::get('alert-type','info')}}"
+          switch(type) {
+            case 'info':
+                  toastr.info("{{ Session::get('message') }}");
+                  break;
+            case 'success':
+                 toastr.success("{{ Session::get('message') }}");
+                 break;
+            case 'warning':
+                 toastr.warning("{{ Session::get('message') }}");
+                 break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                 break;
+          }
+          @endif
     </script>
 
 

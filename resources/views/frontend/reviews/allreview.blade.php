@@ -10,8 +10,7 @@ Car Judge - All Cras Review here
 
 <style media="screen">
     .star-rating {
-        font-size: 0.75em;
-        cursor: pointer;
+        font-size: 1em;
     }
 
     .star-rating .fa-star {
@@ -23,7 +22,7 @@ Car Judge - All Cras Review here
 <div style="background:#ECF0F1;padding:20px;">
 
 
-    <section class="review" id="review">
+    <section class="review py-5" id="review">
         <!--- brands part start--->
 
 
@@ -37,69 +36,169 @@ Car Judge - All Cras Review here
                 </div>
             </div>
 
-            <div class="row mb-5">
-                <div class="col-10 mx-auto col-md-12 d-flex justify-content-center">
-                    <button class="btn btn-outline-secondary text-uppercase mx-2 btn-sm filter-btn" onclick="getFilter('exam')" data-filter="exam" type="button" name="button">After examination drove</button>
-                    <button class="btn btn-outline-secondary text-uppercase mx-2 btn-sm filter-btn" onclick="getFilter('current')" data-filter="current" type="button" name="button">I currently purchase it</button>
-                    <button class="btn btn-outline-secondary text-uppercase mx-2 btn-sm filter-btn" onclick="getFilter('enjoy')" data-filter="enjoy" type="button" name="button">I still enjoy this car</button>
+            <div class="row">
+                <div class="col-4 ml-auto">
+
+                    <form class="form-inline" action="{{ url('/all/reviews/search') }}" method="get">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="inputPassword2" class="sr-only">Enter Car Model</label>
+                            <input type="text" class="form-control" name="search" id="inputPassword2" placeholder="Search Car Model">
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Search</button>
+                    </form>
+
                 </div>
             </div>
 
 
+            <div class="row mt-5">
+
+                @foreach ($singlecar as $row)
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6 col-10 mx-auto mb-5">
 
 
 
+                    <?php
+                    $conn = mysqli_connect("localhost","root","","carjudge");
+                    $query = mysqli_query($conn,"SELECT AVG(orating) as AVGRATE from reviews where car_id = '". $row->id ."'");
+                         $row_rating = mysqli_fetch_array($query);
+                          $AVGRATE=$row_rating['AVGRATE'];
+                    $query = mysqli_query($conn,"SELECT count(orating) as Total from reviews where car_id = '". $row->id ."'");
+                        $row_total = mysqli_fetch_array($query);
+                        $Total=$row_total['Total'];
+                   ?>
 
-
-            <div class="row">
-
-
-                @foreach ($reviews as $row)
-
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 py-3 single-car {{ $row->type }}">
-
-                    <div class="card mb-3" style="height:250px;box-sizing:border-box;">
-                        <div class="card-body">
-
+                    <div class="card">
+                        <img src="{{ URL::to($row->car_image) }}" style="height:190px;" class="card-img-top" alt="">
+                        <div class="card-body" style="text-align:center;">
+                            <h5 class="card-title">{{ $row->car_model }}</h5>
+                            <h6>{{ $row->year }}</h6>
                             <div class="star-rating">
-                                <span class="<?php if($row->orating >= 1){echo "fas";} ;?> fa-star o" data-overall="1" onclick="getOverall(1)"></span>
-                                <span class="<?php if($row->orating >= 2){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="2" onclick="getOverall(2)"></span>
-                                <span class="<?php if($row->orating >= 3){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="3" onclick="getOverall(3)"></span>
-                                <span class="<?php if($row->orating >= 4){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="4" onclick="getOverall(4)"></span>
-                                <span class="<?php if($row->orating >= 5){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="5" onclick="getOverall(5)"></span>
-                            </div>
-                            <div>
-                                <h5 style="margin-bottom:0px">{{ $row->heading }}</h5><small style="font-size:12px;">Posted By <b>{{ $row->name }}</b></small>
-                            </div>
-                            <div style="margin-top:15px;height:80px;overflow:hidden;">
-                                <p style="font-size:15px;">{{ $row->message }}</p>
-                            </div>
+                                <span style="font-size:22px;color:blue;"> <?php echo round($AVGRATE,1); ?> </span><br>
+                                <span class="<?php if($AVGRATE >= 1){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="1" onclick="getOverall(1)"></span>
+                                <span class="<?php if($AVGRATE >= 2){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="2" onclick="getOverall(2)"></span>
+                                <span class="<?php if($AVGRATE >= 3){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="3" onclick="getOverall(3)"></span>
+                                <span class="<?php if($AVGRATE >= 4){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="4" onclick="getOverall(4)"></span>
+                                <span class="<?php if($AVGRATE >= 5){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="5" onclick="getOverall(5)"></span><br>
 
-                            <div style="margin-bottom:5px;">
-                                <a style="text-decoration:none;font-size:11px;" class="btn btn-sm btn-primary" href="{{ url('/carsdetails/reviews/individual/'.$row->user_id) }}">See full review</a>&nbsp;&nbsp;
-                                <a href="{{ url('/carsdetails/reviews/'.$row->car_id) }}" class="btn btn-sm btn-primary" style="text-decoration:none;font-size:11px;">Post Review</a>
+                                <small><?php echo $Total ?>&nbsp;reviews</small>
                             </div>
-                            <p class="card-text"><small class="text-muted">Last updated mins ago</small></p>
+                            <div style="margin-top:12px;">
+                                <a href="{{ url('/carsdetails/reviews/show/'.$row->id) }}" style="font-size:12px;" class="card-link">See all reviews</a>
+
+                            </div>
 
                         </div>
                     </div>
 
-
                 </div>
+
 
                 @endforeach
 
 
 
-                {{ $reviews->links() }}
             </div>
 
+            {{ $singlecar->links() }}
+
+
+            <section class="mostreview py-5">
+
+                <div class="row">
+                    <div class="col-12" style="text-align:center;">
+                        <h1>Most Wanted Cars Reviews</h1>
+                    </div>
+                </div>
 
 
 
 
 
 
+                <div class="row mt-5">
+
+                    <?php
+          $rr = DB::table('reviews')
+            ->leftJoin('singlecar','reviews.car_id','singlecar.id')
+            ->leftJoin('brands','singlecar.brands_id','brands.id')
+            ->leftJoin('boverviews','singlecar.car_model_id','boverviews.id')
+            ->select('car_id','singlecar.id','car_image','year','car_model',DB::raw('count(orating) as average'))
+            ->groupBy('car_id','singlecar.id','car_image','year','car_model')
+            ->orderBy('average', 'DESC')
+            ->paginate(6);
+
+
+                 ?>
+
+                    @foreach ($rr as $row)
+
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-10 mx-auto mb-5">
+
+
+                        <?php
+                          $conn = mysqli_connect("localhost","root","","carjudge");
+                          $query = mysqli_query($conn,"SELECT AVG(orating) as AVGRATE from reviews where car_id = '". $row->id ."'");
+                               $row_rating = mysqli_fetch_array($query);
+                                $AVGRATE=$row_rating['AVGRATE'];
+                          $query = mysqli_query($conn,"SELECT count(orating) as Total from reviews where car_id = '". $row->id ."'");
+                              $row_total = mysqli_fetch_array($query);
+                              $Total=$row_total['Total'];
+                          ?>
+
+
+                        <div class="card">
+                            <img src="{{ URL::to($row->car_image) }}" style="height:190px;" class="card-img-top" alt="">
+                            <div class="card-body" style="text-align:center;">
+                                <h5 class="card-title">{{ $row->car_model }}</h5>
+                                <h6>{{ $row->year }}</h6>
+                                <div class="star-rating">
+                                    <span style="font-size:22px;color:blue;"> <?php echo round($AVGRATE,1); ?> </span><br>
+                                    <span class="<?php if($AVGRATE >= 1){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="1" onclick="getOverall(1)"></span>
+                                    <span class="<?php if($AVGRATE >= 2){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="2" onclick="getOverall(2)"></span>
+                                    <span class="<?php if($AVGRATE >= 3){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="3" onclick="getOverall(3)"></span>
+                                    <span class="<?php if($AVGRATE >= 4){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="4" onclick="getOverall(4)"></span>
+                                    <span class="<?php if($AVGRATE >= 5){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="5" onclick="getOverall(5)"></span><br>
+
+                                    <small><?php echo $Total ?>&nbsp;reviews</small>
+                                </div>
+                                <div style="margin-top:12px;">
+                                    <a href="{{ url('/carsdetails/reviews/show/'.$row->id) }}" style="font-size:12px;" class="card-link">See all reviews</a>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    @endforeach
+
+
+
+
+
+
+                </div>
+
+                {{ $rr->links() }}
+
+            </section>
+
+
+
+
+
+
+
+
+
+
+            {{-- <?php $dt = Carbon\Carbon::now(); echo $dt;  ?> --}}
 
 
             <script type="text/javascript">
@@ -122,14 +221,6 @@ Car Judge - All Cras Review here
                     });
                 }
             </script>
-
-
-
-
-
-
-
-
 
 
         </div>
