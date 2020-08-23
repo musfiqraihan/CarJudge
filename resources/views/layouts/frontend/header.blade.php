@@ -108,8 +108,20 @@
 
 
                                 <a class="dropdown-item" style="color:black;" href="{{ route('user.profile', Auth::user()->id ) }}"><i class="fas fa-user"></i>&nbsp;&nbsp;My Profile</a>
+                                <?php
+                                $savedata = DB::table('savedcars')
+                                  ->leftJoin('users','savedcars.user_id','users.id')
+                                  ->leftJoin('singlecar','savedcars.car_id','singlecar.id')
+                                  ->leftJoin('brands','singlecar.brands_id','brands.id')
+                                  ->leftJoin('boverviews','singlecar.car_model_id','boverviews.id')
+                                  ->where('savedcars.user_id','=',Auth::user()->id)
+                                  ->select('savedcars.car_id','singlecar.id')
+                                  ->get();
 
-                                <a class="dropdown-item" style="color:black;" href="" onclick=""><i class="fas fa-heart"></i>&nbsp;&nbsp;Saved Cars</a>
+                                $count = $savedata->count();
+                                ?>
+
+                                <a class="dropdown-item" style="color:black;" href="{{ url('/home/savecar/list') }}" onclick=""><i class="fas fa-heart"></i>&nbsp;&nbsp;Saved Cars (<?php echo $count ?>)</a>
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" style="color:black;" href="{{ route('logout') }}" onclick="event.preventDefault();

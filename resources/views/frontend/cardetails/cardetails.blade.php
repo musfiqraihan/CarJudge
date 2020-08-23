@@ -1,13 +1,13 @@
 @extends('layouts.frontend.header')
 
 @section('title')
-  Car Judge - {{ $singlecar->car_model }} Details
+Car Judge - {{ $singlecar->car_model }} Details
 @endsection
 
 @section('content')
 
 
-  <?php
+<?php
   $conn = mysqli_connect("localhost","root","","carjudge");
   $query = mysqli_query($conn,"SELECT AVG(orating) as AVGRATE from reviews where car_id = '". $singlecar->id ."'");
        $row_rating = mysqli_fetch_array($query);
@@ -16,15 +16,15 @@
       $row = mysqli_fetch_array($query);
       $Total=$row['Total'];
  ?>
- <style media="screen">
-     .star-rating {
-         font-size: 1em;
-     }
+<style media="screen">
+    .star-rating {
+        font-size: 1em;
+    }
 
-     .star-rating .fa-star {
-         color: var(--mainBlue);
-     }
- </style>
+    .star-rating .fa-star {
+        color: var(--mainBlue);
+    }
+</style>
 
 <section class="content my-5">
 
@@ -42,19 +42,70 @@
                         <br>
                         <h3>{{ $singlecar->car_model }}</h3><br>
                         <div class="star-rating">
-                            <span style="font-size:22px;color:blue;">  <?php echo round($AVGRATE,1); ?> </span><br>
+                            <span style="font-size:22px;color:blue;"> <?php echo round($AVGRATE,1); ?> </span><br>
                             <span class="<?php if($AVGRATE >= 1){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="1" onclick="getOverall(1)"></span>
                             <span class="<?php if($AVGRATE >= 2){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="2" onclick="getOverall(2)"></span>
                             <span class="<?php if($AVGRATE >= 3){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="3" onclick="getOverall(3)"></span>
                             <span class="<?php if($AVGRATE >= 4){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="4" onclick="getOverall(4)"></span>
                             <span class="<?php if($AVGRATE >= 5){echo "fas";}else{echo "far";}; ?> fa-star o" data-overall="5" onclick="getOverall(5)"></span><br>
 
-               <small><?php echo $Total ?>&nbsp;reviews</small>
+                            <small><?php echo $Total ?>&nbsp;reviews</small>
                         </div>
                         <a style="color:blue;text-decoration:none;" href="{{ url('/carsdetails/reviews/show/'.$singlecar->id) }}">See all reviews</a>
                         <br><br>
                         <h3 style="margin-top:4px;">৳&nbsp;{{ $singlecar->car_price }}</h3><br>
-                        <a href="{{ url('/carsdetails/reviews/'.$singlecar->id) }}" class="btn btn-success" style="color:white;">Post Review</a>
+                        <a href="{{ url('/carsdetails/reviews/'.$singlecar->id) }}" class="btn btn-outline-primary" style="margin-Bottom:10px;">Post Review</a>
+                        <a href="{{ url('/getData1/'.$singlecar->id) }}" class="btn btn-outline-secondary" style="margin-Bottom:10px;">Add to Compare</a>
+                        <br>
+                        @guest
+                          @if (Auth::guest())
+
+                          <?php
+                          $count =0;
+                          if($count == 0) {?>
+                            <form action="{{ url('/home/cardetails/savecar') }}" method="get">
+                              @csrf
+                              <input type="hidden" value="{{ $singlecar->id }}" name="id">
+                              <input type="submit" value="Save This Car" class="btn btn-outline-info">
+                            </form>
+                          <?php }else {?>
+                            <p style="color:green;">Added To <a href="{{ url('/home/savecar/list') }}" style="text-decoration:none;">Save Car</a></p>
+                          <?php } ?>
+                        @endif
+                          @else
+                            <?php
+                            $savedata = DB::table('savedcars')
+                              ->leftJoin('users','savedcars.user_id','users.id')
+                              ->leftJoin('singlecar','savedcars.car_id','singlecar.id')
+                              ->leftJoin('brands','singlecar.brands_id','brands.id')
+                              ->leftJoin('boverviews','singlecar.car_model_id','boverviews.id')
+                              ->where('savedcars.user_id','=',Auth::user()->id)
+                              ->where('savedcars.car_id','=', $singlecar->id)
+                              ->select('savedcars.car_id','singlecar.id')
+                              ->get();
+
+                            $count = $savedata->count();
+                            ?>
+
+                            <?php if($count == 0) {?>
+                              <form action="{{ url('/home/cardetails/savecar') }}" method="get">
+                                @csrf
+                                <input type="hidden" value="{{ $singlecar->id }}" name="id">
+                                <input type="submit" value="Save This Car" class="btn btn-outline-info">
+                              </form>
+                            <?php }else {?>
+                              <p style="color:green;">Added To <a href="{{ url('/home/savecar/list') }}" style="text-decoration:none;">Save Car</a></p>
+                            <?php } ?>
+
+                        @endguest
+
+
+
+
+
+
+
+
                     </div>
                 </div>
 
@@ -95,8 +146,8 @@
                         <span style="font-size:26px;">OVERVIEW</span>
 
 
-                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
 
                     </div>
                     <div class="card-body" style="display: block;">
@@ -154,7 +205,7 @@
 
                 </div>
 
-<br>
+                <br>
 
 
                 <div class="card collapsed-card">
@@ -162,8 +213,8 @@
                         <span style="font-size:26px;">COMFORT & CONVENIENCE</span>
 
 
-                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-plus"></i></button>
 
                     </div>
                     <div class="card-body" style="display: none;">
@@ -284,15 +335,15 @@
 
                 </div>
 
-<br>
+                <br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
                         <span style="font-size:26px;">SAFETY</span>
 
 
-                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-plus"></i></button>
 
                     </div>
                     <div class="card-body" style="display: none;">
@@ -393,7 +444,7 @@
                     </div>
                 </div>
 
-<br>
+                <br>
 
 
                 <div class="card collapsed-card">
@@ -401,8 +452,8 @@
                         <span style="font-size:26px;">ENTERTAINMENT & COMMUNICATION</span>
 
 
-                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-plus"></i></button>
 
                     </div>
                     <div class="card-body" style="display: none;">
@@ -464,15 +515,15 @@
 
                 </div>
 
-<br>
+                <br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
                         <span style="font-size:26px;">INTERIOR</span>
 
 
-                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-plus"></i></button>
 
                     </div>
                     <div class="card-body" style="display: none;">
@@ -537,15 +588,15 @@
                 </div>
 
 
-<br>
+                <br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
                         <span style="font-size:26px;">FUEL & PERFORMANCE</span>
 
 
-                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-plus"></i></button>
 
                     </div>
                     <div class="card-body" style="display: none;">
@@ -587,15 +638,15 @@
 
                 </div>
 
-<br>
+                <br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
                         <span style="font-size:26px;">ENGINE & TRANSMISSION</span>
 
 
-                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-plus"></i></button>
 
                     </div>
                     <div class="card-body" style="display: none;">
@@ -668,7 +719,7 @@
                     </div>
                 </div>
 
-<br>
+                <br>
 
 
                 <div class="card collapsed-card">
@@ -676,8 +727,8 @@
                         <span style="font-size:26px;">DIMENTION & CAPACITY</span>
 
 
-                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-plus"></i></button>
 
                     </div>
                     <div class="card-body" style="display: none;">
@@ -747,15 +798,15 @@
 
                 </div>
 
-<br>
+                <br>
 
                 <div class="card collapsed-card">
                     <div class="card-header">
                         <span style="font-size:26px;">SUSPENSION, STEERING & BRAKES</span>
 
 
-                            <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-tool float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-plus"></i></button>
 
                     </div>
                     <div class="card-body" style="display: none;">
@@ -815,7 +866,7 @@
 
                 </div>
 
-<br>
+                <br>
 
 
 

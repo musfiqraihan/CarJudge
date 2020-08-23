@@ -14,13 +14,78 @@ Car Judge - Right Place To Find Cars
 <div class="container-fluid coverpage">
     <div class="row height-max align-items-center">
 
-
+      <!---start search--->
       <div class="container-fluid">
           <div class="modal-dialog modal-lg" style="opacity:0.9;">
+              <div class="modal-content bg-light">
+
+                  <div class="modal-body">
+
+
+                      <div class="row">
+                          @csrf
+                          <div class="col-md-4">
+                              <div class="floating-label-form-group">
+                                  <label style="color:black;">Choose Brand</label>
+                                  <br>
+                                  <select class="form-control text-size" id="brands_id" name="brands_id">
+                                      <option selected="" disabled="">Select</option>
+                                      @foreach ($brands as $row)
+                                      <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                      @endforeach
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="floating-label-form-group">
+                                  <label style="color:black;">Choose Car Model</label>
+                                  <br>
+                                  <select class="form-control text-size dynamic" id="car_model_id" name="car_model_id">
+                                      <option selected="" disabled="">Select</option>
+
+                                      <option value=""></option>
+
+                                  </select>
+                              </div>
+                          </div>
+
+                          <div class="col-md-4">
+                              <div class="floating-label-form-group">
+                                  <label style="color:black;">Choose Year</label>
+                                  <br>
+                                  <select class="form-control text-size dynamic" id="year" name="year">
+                                      <option selected="" disabled="">Select</option>
+
+                                      <option value=""></option>
+
+                                  </select>
+                              </div>
+                          </div>
+
+
+                      </div>
 
 
 
-            
+                      <div class="row">
+
+                          <div class="col-md-9" style="margin-top:15px;">
+                              <button type="submit" name="search" id="search" class="btn btn-success btn-block" style="font-size:16px;">Search</button>
+                          </div>
+                          <div class="col-md-3" style="margin-top:10px;">
+
+                              <small style="color:black;">Not found yet then go for</small>
+                              <span class="adv-search"><a href="#">Advance Search?</a></span>
+
+                          </div>
+
+                      </div>
+
+
+
+                  </div>
+              </div>
+              <!---end search-->
 
               <h2 class="text-capitalize text-center display-3">Find Your Next Car</h2>
               <h2 class="text capitalize text-center">Right place to find Cars</h2>
@@ -33,6 +98,86 @@ Car Judge - Right Place To Find Cars
 
 
 
+      <script type="text/javascript">
+          jQuery(document).ready(function() {
+
+              jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
+              jQuery('select[name="year"]').attr('disabled', 'disabled');
+
+              jQuery('select[name="brands_id"]').on('change', function() {
+                  var brandID = jQuery(this).val();
+                  if (brandID) {
+                      jQuery('select[name="car_model_id"]').attr('disabled', 'disabled');
+                      jQuery('select[name="year"]').attr('disabled', 'disabled');
+
+                      jQuery.ajax({
+                          url: '/getmodels/' + brandID,
+                          type: "GET",
+                          dataType: "json",
+                          success: function(data) {
+                              jQuery('select[name="car_model_id"]').empty();
+                              jQuery('select[name="year"]').empty();
+                              $('select[name="car_model_id"]').append('<option selected="" disabled="">Select</option>');
+                              $('select[name="year"]').append('<option selected="" disabled="">Select</option>');
+                              jQuery.each(data, function(key, value) {
+                                  $('select[name="car_model_id"]').append('<option value="' + key + '">' + value + '</option>');
+                              });
+                              jQuery('select[name="car_model_id"]').removeAttr('disabled');
+                          }
+                      });
+
+                  } else {
+                      $('select[name="car_model_id"]').empty();
+                      $('select[name="year"]').empty();
+                  }
+              });
+
+
+          });
+
+          jQuery(document).ready(function() {
+
+
+              jQuery('select[name="car_model_id"]').on('change', function() {
+                  var modelID = jQuery(this).val();
+                  if (modelID) {
+                      jQuery('select[name="year"]').attr('disabled', 'disabled');
+
+                      jQuery.ajax({
+                          url: '/getyears/' + modelID,
+                          type: "GET",
+                          dataType: "json",
+                          success: function(data) {
+                              jQuery('select[name="year"]').empty();
+                              $('select[name="year"]').append('<option selected="" disabled="">Select</option>');
+                              jQuery.each(data, function(key, value) {
+                                  $('select[name="year"]').append('<option value="' + key + '">' + value + '</option>');
+                              });
+                              jQuery('select[name="year"]').removeAttr('disabled');
+                          }
+                      });
+
+                  } else {
+                      $('select[name="car_model_id"]').empty();
+                      $('select[name="year"]').empty();
+                  }
+              });
+
+
+
+          });
+      </script>
+
+
+      <script type="text/javascript">
+          $("#search").on("click", function() {
+              var link = document.getElementById("year").value;
+
+              $.ajax({
+                  url: window.location.href = "/getData/" + link
+              });
+          });
+      </script>
 
 
 

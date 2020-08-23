@@ -26,13 +26,13 @@ Auth::routes();
 Route::get('/brands/cardetails/{id}', 'CarDetailsController@details');
 Route::post('/home/subscribe', 'SubscribeController@subscribe');
 
-//car specific car for welcome page
-Route::get('/getData/{id}', 'frontend\CarSearchController@getData')->name('getData');
-
-
-//json data pass for searching option
-Route::get('/getmodels/{id}', 'frontend\CarSearchController@getmodels');
-Route::get('/getyears/{id}', 'frontend\CarSearchController@getyears');
+// //car specific car for welcome page
+// Route::get('/getData/{id}', 'frontend\CarSearchController@getData')->name('getData');
+//
+//
+// //json data pass for searching option
+// Route::get('/getmodels/{id}', 'frontend\CarSearchController@getmodels');
+// Route::get('/getyears/{id}', 'frontend\CarSearchController@getyears');
 //json data pass for admin single car
 Route::get('/admingetmodels/{id}', 'backend\SingleCarController@getadminmodels');
 
@@ -47,8 +47,13 @@ Route::get('/services', 'frontend\ServiceController@services')->name('service_pa
 
 //compare page==============
 Route::get('/compares', 'frontend\CompareController@compares')->name('compare_page');
-
-
+//car specific car for welcome page
+Route::get('/getData1/{id}', 'frontend\CompareController@getData1');
+Route::get('/getData2/{id}', 'frontend\CompareController@getData2');
+Route::get('/getData1/{id1}/getData2/{id2}', 'frontend\CompareController@getAllData1');
+Route::get('/getData2/{id2}/getData1/{id1}', 'frontend\CompareController@getAllData2');
+//json data pass for searching option
+Route::get('/getyears/{id}', 'frontend\CompareController@getyears');
 
 
 //contact page==============
@@ -82,6 +87,9 @@ Route::group(['middleware' => ['auth','user']], function (){
   Route::post('/home/profile/update/', 'HomeController@updateProfile')->name('update.profile');
   Route::get('/home/profile/password/edit/{id}', 'HomeController@passchange')->name('change.password');
   Route::post('/home/profile/password/update/', 'HomeController@updatepass')->name('update.pass');
+  Route::get('/home/cardetails/savecar', 'HomeController@savecar');
+  Route::get('/home/savecar/list', 'HomeController@savecarlist');
+  Route::get('/home/savecar/list/remove/{id}', 'HomeController@savecardelete');
 });
 
 

@@ -7,6 +7,7 @@ use DB;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
+use App\savedCar;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,62 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+     public function index()
+     {
+       $brands = DB::table('brands')->get();
+       $singlecar = DB::table('singlecar')
+       ->join('brands','singlecar.brands_id','brands.id')
+       ->join('boverviews','singlecar.car_model_id','boverviews.id')
+       ->select('singlecar.*','brands.name','boverviews.car_model')
+       ->paginate(6);
+       return view('home',compact('brands','singlecar'))->with('success','Welcome');
+     }
+
+
+public function savecar(Request $request)
+{
+  $savedCar = new savedCar;
+  $savedCar->user_id = Auth::user()->id;
+  $savedCar->car_id = $request->id;
+
+  $savedCar->save();
+  return redirect()->back();
+}
+
+public function savecarlist(Request $request)
+{
+  $savedata = DB::table('savedcars')
+    ->leftJoin('users','savedcars.user_id','users.id')
+    ->leftJoin('singlecar','savedcars.car_id','singlecar.id')
+    ->leftJoin('brands','singlecar.brands_id','brands.id')
+    ->leftJoin('boverviews','singlecar.car_model_id','boverviews.id')
+    ->where('savedcars.user_id','=',Auth::user()->id)
+    ->select('savedcars.id','car_id','singlecar.id','car_image','brands.name','car_model','car_price','body_type','transmission','fuel_type','year','engine','seat')
+    ->paginate(5);
+  return view('frontend.savedcars.savecar',compact('savedata'));
+}
+
+public function savecardelete(Request $request,$id)
+{
+  $delete=DB::table('savedcars')->where('car_id',$id)->delete();
+  if ($delete) {
+    $notification=array(
+        'message'=>'Remove Successfully',
+        'alert-type'=>'success'
+    );
+    return redirect()->back()->with($notification);
+
+      }else{
+        $notification=array(
+            'message'=>'Something wrong -_-',
+            'alert-type'=>'error'
+        );
+        return redirect()->back()->with($notification);
+      }
+}
+
+
 
 public function profile($id)
 {
@@ -112,14 +169,5 @@ public function updateProfile(Request $request)
 
 
 
-    public function index()
-    {
-      $brands = DB::table('brands')->get();
-      $singlecar = DB::table('singlecar')
-      ->join('brands','singlecar.brands_id','brands.id')
-      ->join('boverviews','singlecar.car_model_id','boverviews.id')
-      ->select('singlecar.*','brands.name','boverviews.car_model')
-      ->get();
-      return view('home',compact('brands','singlecar'));
-    }
+
 }
