@@ -29,8 +29,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" media="screen">
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+
+
+    <script src="{{ asset('js/app.js') }}"></script>
     <!---font---->
     <script src="{{ asset('js/all.js') }}"></script>
 
@@ -261,7 +264,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
     <!---jquery---->
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+
     <!----script js---->
     <script src="{{ asset('js/script.js') }}"></script>
     <!----bootstrap js---->

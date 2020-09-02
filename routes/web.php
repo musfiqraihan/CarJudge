@@ -24,15 +24,22 @@ Auth::routes();
 
 
 Route::get('/brands/cardetails/{id}', 'CarDetailsController@details');
+Route::get('/home/advance/search/details', 'AdvSearchController@advsearch');
 Route::post('/home/subscribe', 'SubscribeController@subscribe');
 
+Route::get('/home/advance/search/specific', 'AdvSearchController@specificsearch');
+
+Route::get('/home/autocomplete','Controller@fetch');
+
+Route::get('/home/search','Controller@search');
+
 // //car specific car for welcome page
-// Route::get('/getData/{id}', 'frontend\CarSearchController@getData')->name('getData');
-//
-//
-// //json data pass for searching option
-// Route::get('/getmodels/{id}', 'frontend\CarSearchController@getmodels');
-// Route::get('/getyears/{id}', 'frontend\CarSearchController@getyears');
+Route::get('/getData/{id}', 'frontend\CarSearchController@getData')->name('getData');
+
+
+//json data pass for searching option
+Route::get('/getmodels/{id}', 'frontend\CarSearchController@getmodels');
+Route::get('/getyears/{id}', 'frontend\CarSearchController@getyears');
 //json data pass for admin single car
 Route::get('/admingetmodels/{id}', 'backend\SingleCarController@getadminmodels');
 
