@@ -1,7 +1,7 @@
 @extends('layouts.frontend.header')
 
 @section('title')
-  Car Judge - {{ $singlecar->car_model }} Reviews here
+  Car Judge - Reviews here
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
 
-            <h2>Review placed for {{ $singlecar->car_model }}</h2>
+            
             <br>
             <h4 style="font-weight:600;margin-bottom:0;">{{ $reviews->heading }}</h4><small>posted By {{ $reviews->name }} from {{ $reviews->city }}</small>
             <div style="margin-top:20px;height:250px;overflow:hidden;">
